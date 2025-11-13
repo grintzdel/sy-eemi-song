@@ -10,11 +10,13 @@ use Symfony\Component\Messenger\Exception\ExceptionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
-abstract class AppController extends AbstractController {
+abstract class AppController extends AbstractController
+{
     private MessageBusInterface $commandBus;
     private MessageBusInterface $queryBus;
 
-    public function __construct(MessageBusInterface $commandBus, MessageBusInterface $queryBus) {
+    public function __construct(MessageBusInterface $commandBus, MessageBusInterface $queryBus)
+    {
         $this->commandBus = $commandBus;
         $this->queryBus = $queryBus;
     }
@@ -33,7 +35,8 @@ abstract class AppController extends AbstractController {
     /**
      * @throws ExceptionInterface
      */
-    public function dispatchQuery($query): JsonResponse {
+    public function dispatchQuery($query): JsonResponse
+    {
         $envelope = $this->queryBus->dispatch($query);
         $response = $envelope->last(HandledStamp::class)->getResult();
 
