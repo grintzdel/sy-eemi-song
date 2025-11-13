@@ -7,6 +7,7 @@ namespace App\Modules\Song\Application\Commands\UpdateSong;
 use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 use App\Modules\Shared\Domain\ValueObjects\CoverImage;
 use App\Modules\Shared\Domain\ValueObjects\SongId;
+use App\Modules\Shared\Domain\ValueObjects\TagId;
 use App\Modules\Shared\Domain\ValueObjects\UserId;
 use App\Modules\Song\Application\ViewModels\SongViewModel;
 use App\Modules\Song\Domain\Exceptions\InvalidDurationException;
@@ -16,7 +17,6 @@ use App\Modules\Song\Domain\Exceptions\UnauthorizedSongAccessException;
 use App\Modules\Song\Domain\Repositories\ISongRepository;
 use App\Modules\Song\Domain\ValueObjects\SongDuration;
 use App\Modules\Song\Domain\ValueObjects\SongName;
-use App\Modules\Song\Domain\ValueObjects\SongTag;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
@@ -51,14 +51,20 @@ final readonly class UpdateSongCommandHandler
             );
         }
 
+        $tagId = $command->getTagId() !== null
+            ? new TagId($command->getTagId())
+            : null;
+
+        $coverImage = $command->getCoverImage() !== null
+            ? new CoverImage($command->getCoverImage())
+            : null;
+
         $song->update(
             name: new SongName($command->getName()),
             categoryId: new CategoryId($command->getCategoryId()),
-            tag: new SongTag($command->getTag()),
+            tagId: $tagId,
             duration: new SongDuration($command->getDuration()),
-            coverImage: $command->getCoverImage() !== null
-                ? new CoverImage($command->getCoverImage())
-                : null
+            coverImage: $coverImage
         );
 
         $this->songRepository->save($song);

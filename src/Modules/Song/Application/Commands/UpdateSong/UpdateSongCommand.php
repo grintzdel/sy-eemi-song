@@ -24,8 +24,8 @@ final readonly class UpdateSongCommand
     #[Assert\Uuid(message: 'Category ID must be a valid UUID')]
     private string $categoryId;
 
-    #[Assert\Length(max: 100, maxMessage: 'Tag cannot exceed 100 characters')]
-    private ?string $tag;
+    #[Assert\Uuid(message: 'Tag ID must be a valid UUID')]
+    private ?string $tagId;
 
     #[Assert\NotBlank(message: 'Duration is required')]
     #[Assert\Positive(message: 'Duration must be greater than 0')]
@@ -43,7 +43,7 @@ final readonly class UpdateSongCommand
         string $artistId,
         string $name,
         string $categoryId,
-        ?string $tag,
+        ?string $tagId,
         int $duration,
         ?string $coverImage = null
     )
@@ -52,7 +52,7 @@ final readonly class UpdateSongCommand
         $this->artistId = $artistId;
         $this->name = $name;
         $this->categoryId = $categoryId;
-        $this->tag = $tag;
+        $this->tagId = $tagId;
         $this->duration = $duration;
         $this->coverImage = $coverImage;
     }
@@ -77,9 +77,9 @@ final readonly class UpdateSongCommand
         return $this->categoryId;
     }
 
-    public function getTag(): ?string
+    public function getTagId(): ?string
     {
-        return $this->tag;
+        return $this->tagId;
     }
 
     public function getDuration(): int

@@ -7,10 +7,10 @@ namespace App\Modules\Song\Domain\Entities;
 use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 use App\Modules\Shared\Domain\ValueObjects\CoverImage;
 use App\Modules\Shared\Domain\ValueObjects\SongId;
+use App\Modules\Shared\Domain\ValueObjects\TagId;
 use App\Modules\Shared\Domain\ValueObjects\UserId;
 use App\Modules\Song\Domain\ValueObjects\SongDuration;
 use App\Modules\Song\Domain\ValueObjects\SongName;
-use App\Modules\Song\Domain\ValueObjects\SongTag;
 
 class Song
 {
@@ -19,7 +19,7 @@ class Song
         private readonly UserId             $artistId,
         private SongName                    $name,
         private CategoryId                  $categoryId,
-        private SongTag                     $tag,
+        private ?TagId                      $tagId,
         private SongDuration                $duration,
         private ?CoverImage                 $coverImage,
         private readonly \DateTimeImmutable $createdAt,
@@ -32,7 +32,7 @@ class Song
         UserId       $artistId,
         SongName     $name,
         CategoryId   $categoryId,
-        SongTag      $tag,
+        ?TagId       $tagId,
         SongDuration $duration,
         ?CoverImage  $coverImage = null
     ): self
@@ -44,7 +44,7 @@ class Song
             $artistId,
             $name,
             $categoryId,
-            $tag,
+            $tagId,
             $duration,
             $coverImage,
             $now,
@@ -55,14 +55,14 @@ class Song
     public function update(
         SongName     $name,
         CategoryId   $categoryId,
-        SongTag      $tag,
+        ?TagId       $tagId,
         SongDuration $duration,
         ?CoverImage  $coverImage = null
     ): void
     {
         $this->name = $name;
         $this->categoryId = $categoryId;
-        $this->tag = $tag;
+        $this->tagId = $tagId;
         $this->duration = $duration;
         $this->coverImage = $coverImage;
         $this->updatedAt = new \DateTimeImmutable();
@@ -111,9 +111,9 @@ class Song
         return $this->categoryId;
     }
 
-    public function getTag(): SongTag
+    public function getTagId(): ?TagId
     {
-        return $this->tag;
+        return $this->tagId;
     }
 
     public function getDuration(): SongDuration

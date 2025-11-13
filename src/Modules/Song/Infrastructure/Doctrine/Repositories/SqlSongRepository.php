@@ -7,6 +7,7 @@ namespace App\Modules\Song\Infrastructure\Doctrine\Repositories;
 use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 use App\Modules\Shared\Domain\ValueObjects\CoverImage;
 use App\Modules\Shared\Domain\ValueObjects\SongId;
+use App\Modules\Shared\Domain\ValueObjects\TagId;
 use App\Modules\Shared\Domain\ValueObjects\UserId;
 use App\Modules\Song\Domain\Entities\Song;
 use App\Modules\Song\Domain\Exceptions\InvalidDurationException;
@@ -14,7 +15,6 @@ use App\Modules\Song\Domain\Exceptions\InvalidSongNameException;
 use App\Modules\Song\Domain\Repositories\ISongRepository;
 use App\Modules\Song\Domain\ValueObjects\SongDuration;
 use App\Modules\Song\Domain\ValueObjects\SongName;
-use App\Modules\Song\Domain\ValueObjects\SongTag;
 use App\Modules\Song\Infrastructure\Doctrine\Entities\SongEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -101,16 +101,22 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
      */
     private function toDomain(SongEntity $entity): Song
     {
+        $tagId = $entity->getTagId() !== null
+            ? new TagId($entity->getTagId())
+            : null;
+
+        $coverImage = $entity->getCoverImage() !== null
+            ? new CoverImage($entity->getCoverImage())
+            : null;
+
         return new Song(
             id: new SongId($entity->getId()),
             artistId: new UserId($entity->getArtistId()),
             name: new SongName($entity->getName()),
             categoryId: new CategoryId($entity->getCategoryId()),
-            tag: new SongTag($entity->getTag()),
+            tagId: $tagId,
             duration: new SongDuration($entity->getDuration()),
-            coverImage: $entity->getCoverImage() !== null
-                ? new CoverImage($entity->getCoverImage())
-                : null,
+            coverImage: $coverImage,
             createdAt: $entity->getCreatedAt(),
             updatedAt: $entity->getUpdatedAt(),
             deletedAt: $entity->getDeletedAt()
@@ -124,7 +130,7 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
             artistId: $song->getArtistId()->getValue(),
             name: $song->getName()->getValue(),
             categoryId: $song->getCategoryId()->getValue(),
-            tag: $song->getTag()->getValue(),
+            tagId: $song->getTagId()?->getValue(),
             duration: $song->getDuration()->getSeconds(),
             coverImage: $song->getCoverImage()?->getValue(),
             createdAt: $song->getCreatedAt(),
@@ -137,7 +143,7 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
     {
         $entity->setName($song->getName()->getValue());
         $entity->setCategoryId($song->getCategoryId()->getValue());
-        $entity->setTag($song->getTag()->getValue());
+        $entity->setTagId($song->getTagId()?->getValue());
         $entity->setDuration($song->getDuration()->getSeconds());
         $entity->setCoverImage($song->getCoverImage()?->getValue());
         $entity->setUpdatedAt($song->getUpdatedAt());

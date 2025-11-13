@@ -31,8 +31,8 @@ class SongEntity
     #[ORM\InverseJoinColumn(name: 'album_id', referencedColumnName: 'id')]
     private Collection $albums;
 
-    #[ORM\Column(type: 'string', length: 100, nullable: true)]
-    private ?string $tag;
+    #[ORM\Column(name: 'tag_id', type: 'string', length: 36, nullable: true)]
+    private ?string $tagId;
 
     #[ORM\Column(type: 'integer')]
     private int $duration;
@@ -54,7 +54,7 @@ class SongEntity
         string $artistId,
         string $name,
         string $categoryId,
-        ?string $tag,
+        ?string $tagId,
         int $duration,
         ?string $coverImage,
         \DateTimeImmutable $createdAt,
@@ -66,7 +66,7 @@ class SongEntity
         $this->artistId = $artistId;
         $this->name = $name;
         $this->categoryId = $categoryId;
-        $this->tag = $tag;
+        $this->tagId = $tagId;
         $this->duration = $duration;
         $this->coverImage = $coverImage;
         $this->createdAt = $createdAt;
@@ -122,14 +122,14 @@ class SongEntity
         $this->albums->removeElement($album);
     }
 
-    public function getTag(): ?string
+    public function getTagId(): ?string
     {
-        return $this->tag;
+        return $this->tagId;
     }
 
-    public function setTag(?string $tag): void
+    public function setTagId(?string $tagId): void
     {
-        $this->tag = $tag;
+        $this->tagId = $tagId;
     }
 
     public function getDuration(): int

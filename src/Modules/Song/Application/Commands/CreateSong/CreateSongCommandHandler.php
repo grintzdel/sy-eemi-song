@@ -8,6 +8,7 @@ use App\Modules\Shared\Application\Ports\Services\IIdProvider;
 use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 use App\Modules\Shared\Domain\ValueObjects\CoverImage;
 use App\Modules\Shared\Domain\ValueObjects\SongId;
+use App\Modules\Shared\Domain\ValueObjects\TagId;
 use App\Modules\Shared\Domain\ValueObjects\UserId;
 use App\Modules\Song\Application\ViewModels\IdViewModel;
 use App\Modules\Song\Domain\Entities\Song;
@@ -16,7 +17,6 @@ use App\Modules\Song\Domain\Exceptions\InvalidSongNameException;
 use App\Modules\Song\Domain\Repositories\ISongRepository;
 use App\Modules\Song\Domain\ValueObjects\SongDuration;
 use App\Modules\Song\Domain\ValueObjects\SongName;
-use App\Modules\Song\Domain\ValueObjects\SongTag;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
@@ -33,16 +33,22 @@ final readonly class CreateSongCommandHandler
      */
     public function __invoke(CreateSongCommand $command): IdViewModel
     {
+        $tagId = $command->getTagId() !== null
+            ? new TagId($command->getTagId())
+            : null;
+
+        $coverImage = $command->getCoverImage() !== null
+            ? new CoverImage($command->getCoverImage())
+            : null;
+
         $song = Song::create(
             id: new SongId($this->idProvider->generateId()),
             artistId: new UserId($command->getArtistId()),
             name: new SongName($command->getName()),
             categoryId: new CategoryId($command->getCategoryId()),
-            tag: new SongTag($command->getTag()),
+            tagId: $tagId,
             duration: new SongDuration($command->getDuration()),
-            coverImage: $command->getCoverImage() !== null
-                ? new CoverImage($command->getCoverImage())
-                : null
+            coverImage: $coverImage
         );
 
         $this->songRepository->save($song);
