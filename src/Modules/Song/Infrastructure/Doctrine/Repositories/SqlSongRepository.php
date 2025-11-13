@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Modules\Song\Infrastructure\Doctrine\Repositories;
 
 use App\Modules\Song\Domain\Entities\Song;
+use App\Modules\Song\Domain\Exceptions\InvalidCategoryException;
+use App\Modules\Song\Domain\Exceptions\InvalidDurationException;
+use App\Modules\Song\Domain\Exceptions\InvalidSongNameException;
 use App\Modules\Song\Domain\Repositories\ISongRepository;
 use App\Modules\Song\Domain\ValueObjects\Album;
 use App\Modules\Song\Domain\ValueObjects\Category;
@@ -17,6 +20,9 @@ use App\Modules\Song\Infrastructure\Doctrine\Entities\SongEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<SongEntity>
+ */
 class SqlSongRepository extends ServiceEntityRepository implements ISongRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -24,6 +30,11 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
         parent::__construct($registry, SongEntity::class);
     }
 
+    /**
+     * @throws InvalidSongNameException
+     * @throws InvalidDurationException
+     * @throws InvalidCategoryException
+     */
     public function findById(SongId $id): ?Song
     {
         $entity = $this->find($id->getValue());
@@ -32,7 +43,9 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
     }
 
     /**
-     * @return Song[]
+     * @throws InvalidSongNameException
+     * @throws InvalidDurationException
+     * @throws InvalidCategoryException
      */
     public function findByArtistId(UserId $artistId): array
     {
@@ -45,7 +58,9 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
     }
 
     /**
-     * @return Song[]
+     * @throws InvalidSongNameException
+     * @throws InvalidCategoryException
+     * @throws InvalidDurationException
      */
     public function findAll(): array
     {
@@ -81,6 +96,11 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
         }
     }
 
+    /**
+     * @throws InvalidSongNameException
+     * @throws InvalidCategoryException
+     * @throws InvalidDurationException
+     */
     private function toDomain(SongEntity $entity): Song
     {
         return new Song(
