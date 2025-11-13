@@ -6,6 +6,7 @@ namespace App\Modules\Song\Application\Commands\CreateSong;
 
 use App\Modules\Shared\Application\Ports\Services\IIdProvider;
 use App\Modules\Shared\Domain\ValueObjects\CategoryId;
+use App\Modules\Shared\Domain\ValueObjects\SongId;
 use App\Modules\Shared\Domain\ValueObjects\UserId;
 use App\Modules\Song\Application\ViewModels\IdViewModel;
 use App\Modules\Song\Domain\Entities\Song;
@@ -13,7 +14,6 @@ use App\Modules\Song\Domain\Exceptions\InvalidDurationException;
 use App\Modules\Song\Domain\Exceptions\InvalidSongNameException;
 use App\Modules\Song\Domain\Repositories\ISongRepository;
 use App\Modules\Song\Domain\ValueObjects\SongDuration;
-use App\Modules\Song\Domain\ValueObjects\SongId;
 use App\Modules\Song\Domain\ValueObjects\SongName;
 use App\Modules\Song\Domain\ValueObjects\SongTag;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;

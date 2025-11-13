@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Modules\Song\Domain\Entities;
 
 use App\Modules\Shared\Domain\ValueObjects\CategoryId;
+use App\Modules\Shared\Domain\ValueObjects\SongId;
 use App\Modules\Shared\Domain\ValueObjects\UserId;
 use App\Modules\Song\Domain\ValueObjects\SongDuration;
-use App\Modules\Song\Domain\ValueObjects\SongId;
 use App\Modules\Song\Domain\ValueObjects\SongName;
 use App\Modules\Song\Domain\ValueObjects\SongTag;
 

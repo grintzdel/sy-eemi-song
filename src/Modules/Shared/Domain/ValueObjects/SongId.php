@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Modules\Song\Domain\ValueObjects;
+namespace App\Modules\Shared\Domain\ValueObjects;
 
 use Webmozart\Assert\Assert;
 

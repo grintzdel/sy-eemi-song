@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Modules\Song\Domain\Repositories;
 
+use App\Modules\Shared\Domain\ValueObjects\SongId;
 use App\Modules\Shared\Domain\ValueObjects\UserId;
 use App\Modules\Song\Domain\Entities\Song;
-use App\Modules\Song\Domain\ValueObjects\SongId;
 
 interface ISongRepository
 {

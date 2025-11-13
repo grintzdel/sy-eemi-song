@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\Song\Application\Commands\UpdateSong;
 
 use App\Modules\Shared\Domain\ValueObjects\CategoryId;
+use App\Modules\Shared\Domain\ValueObjects\SongId;
 use App\Modules\Shared\Domain\ValueObjects\UserId;
 use App\Modules\Song\Application\ViewModels\SongViewModel;
 use App\Modules\Song\Domain\Exceptions\InvalidDurationException;
@@ -13,7 +14,6 @@ use App\Modules\Song\Domain\Exceptions\SongNotFoundException;
 use App\Modules\Song\Domain\Exceptions\UnauthorizedSongAccessException;
 use App\Modules\Song\Domain\Repositories\ISongRepository;
 use App\Modules\Song\Domain\ValueObjects\SongDuration;
-use App\Modules\Song\Domain\ValueObjects\SongId;
 use App\Modules\Song\Domain\ValueObjects\SongName;
 use App\Modules\Song\Domain\ValueObjects\SongTag;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;

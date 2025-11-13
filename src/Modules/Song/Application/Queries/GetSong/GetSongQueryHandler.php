@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Modules\Song\Application\Queries\GetSong;
 
+use App\Modules\Shared\Domain\ValueObjects\SongId;
 use App\Modules\Song\Application\ViewModels\SongViewModel;
 use App\Modules\Song\Domain\Exceptions\SongNotFoundException;
 use App\Modules\Song\Domain\Repositories\ISongRepository;
-use App\Modules\Song\Domain\ValueObjects\SongId;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
