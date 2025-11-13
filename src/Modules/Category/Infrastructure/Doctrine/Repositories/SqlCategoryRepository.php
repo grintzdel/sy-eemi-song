@@ -29,7 +29,10 @@ class SqlCategoryRepository extends ServiceEntityRepository implements ICategory
      */
     public function findById(CategoryId $id): ?Category
     {
-        $entity = $this->find($id->getValue());
+        $entity = $this->findOneBy([
+            'id' => $id->getValue(),
+            'deletedAt' => null
+        ]);
 
         return $entity ? $this->toDomain($entity) : null;
     }

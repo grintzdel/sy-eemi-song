@@ -30,7 +30,10 @@ class SqlAlbumRepository extends ServiceEntityRepository implements IAlbumReposi
      */
     public function findById(AlbumId $id): ?Album
     {
-        $entity = $this->find($id->getValue());
+        $entity = $this->findOneBy([
+            'id' => $id->getValue(),
+            'deletedAt' => null
+        ]);
 
         return $entity ? $this->toDomain($entity) : null;
     }

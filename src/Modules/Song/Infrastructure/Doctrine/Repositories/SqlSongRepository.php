@@ -34,7 +34,10 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
      */
     public function findById(SongId $id): ?Song
     {
-        $entity = $this->find($id->getValue());
+        $entity = $this->findOneBy([
+            'id' => $id->getValue(),
+            'deletedAt' => null
+        ]);
 
         return $entity ? $this->toDomain($entity) : null;
     }
