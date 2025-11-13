@@ -10,5 +10,7 @@ enum Roles: string
 
     case ROLE_MODERATOR = 'ROLE_MODERATOR';
 
+    case ROLE_ARTIST = 'ROLE_ARTIST';
+
     case ROLE_USER = 'ROLE_USER';
 }
