@@ -6,7 +6,7 @@ namespace App\Modules\Song\Domain\ValueObjects;
 
 use Webmozart\Assert\Assert;
 
-final readonly class Tag
+final readonly class SongTag
 {
     private ?string $value;
 

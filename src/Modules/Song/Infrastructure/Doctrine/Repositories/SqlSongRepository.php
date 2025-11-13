@@ -12,7 +12,7 @@ use App\Modules\Song\Domain\Repositories\ISongRepository;
 use App\Modules\Song\Domain\ValueObjects\SongDuration;
 use App\Modules\Song\Domain\ValueObjects\SongId;
 use App\Modules\Song\Domain\ValueObjects\SongName;
-use App\Modules\Song\Domain\ValueObjects\Tag;
+use App\Modules\Song\Domain\ValueObjects\SongTag;
 use App\Modules\Song\Domain\ValueObjects\UserId;
 use App\Modules\Song\Infrastructure\Doctrine\Entities\SongEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -102,7 +102,7 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
             artistId: new UserId($entity->getArtistId()),
             name: new SongName($entity->getName()),
             categoryId: new CategoryId($entity->getCategoryId()),
-            tag: new Tag($entity->getTag()),
+            tag: new SongTag($entity->getTag()),
             duration: new SongDuration($entity->getDuration()),
             createdAt: $entity->getCreatedAt(),
             updatedAt: $entity->getUpdatedAt(),

@@ -14,7 +14,7 @@ use App\Modules\Song\Domain\Repositories\ISongRepository;
 use App\Modules\Song\Domain\ValueObjects\SongDuration;
 use App\Modules\Song\Domain\ValueObjects\SongId;
 use App\Modules\Song\Domain\ValueObjects\SongName;
-use App\Modules\Song\Domain\ValueObjects\Tag;
+use App\Modules\Song\Domain\ValueObjects\SongTag;
 use App\Modules\Song\Domain\ValueObjects\UserId;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -37,7 +37,7 @@ final readonly class CreateSongCommandHandler
             artistId: new UserId($command->getArtistId()),
             name: new SongName($command->getName()),
             categoryId: new CategoryId($command->getCategoryId()),
-            tag: new Tag($command->getTag()),
+            tag: new SongTag($command->getTag()),
             duration: new SongDuration($command->getDuration())
         );
 

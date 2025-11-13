@@ -8,7 +8,7 @@ use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 use App\Modules\Song\Domain\ValueObjects\SongDuration;
 use App\Modules\Song\Domain\ValueObjects\SongId;
 use App\Modules\Song\Domain\ValueObjects\SongName;
-use App\Modules\Song\Domain\ValueObjects\Tag;
+use App\Modules\Song\Domain\ValueObjects\SongTag;
 use App\Modules\Song\Domain\ValueObjects\UserId;
 
 class Song
@@ -18,7 +18,7 @@ class Song
         private readonly UserId             $artistId,
         private SongName                    $name,
         private CategoryId                  $categoryId,
-        private Tag                         $tag,
+        private SongTag                     $tag,
         private SongDuration                $duration,
         private readonly \DateTimeImmutable $createdAt,
         private \DateTimeImmutable          $updatedAt,
@@ -26,11 +26,11 @@ class Song
     ) {}
 
     public static function create(
-        SongId $id,
-        UserId $artistId,
-        SongName $name,
-        CategoryId $categoryId,
-        Tag $tag,
+        SongId       $id,
+        UserId       $artistId,
+        SongName     $name,
+        CategoryId   $categoryId,
+        SongTag      $tag,
         SongDuration $duration
     ): self
     {
@@ -49,9 +49,9 @@ class Song
     }
 
     public function update(
-        SongName $name,
-        CategoryId $categoryId,
-        Tag $tag,
+        SongName     $name,
+        CategoryId   $categoryId,
+        SongTag      $tag,
         SongDuration $duration
     ): void
     {
@@ -105,7 +105,7 @@ class Song
         return $this->categoryId;
     }
 
-    public function getTag(): Tag
+    public function getTag(): SongTag
     {
         return $this->tag;
     }
