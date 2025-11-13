@@ -10,6 +10,7 @@ final readonly class AlbumViewModel
         public string $id,
         public string $authorId,
         public string $name,
+        public ?string $categoryId,
         public \DateTimeImmutable $createdAt,
         public \DateTimeImmutable $updatedAt,
         public ?\DateTimeImmutable $deletedAt = null

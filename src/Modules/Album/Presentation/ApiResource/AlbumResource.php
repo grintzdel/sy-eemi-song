@@ -58,6 +58,9 @@ class AlbumResource
     )]
     public ?string $name = null;
 
+    #[Assert\Uuid(message: 'Category ID must be a valid UUID')]
+    public ?string $categoryId = null;
+
     public ?\DateTimeImmutable $createdAt = null;
 
     public ?\DateTimeImmutable $updatedAt = null;

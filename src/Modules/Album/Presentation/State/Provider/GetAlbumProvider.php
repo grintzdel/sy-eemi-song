@@ -42,6 +42,7 @@ final class GetAlbumProvider implements ProviderInterface
         $resource->id = $viewModel->id;
         $resource->authorId = $viewModel->authorId;
         $resource->name = $viewModel->name;
+        $resource->categoryId = $viewModel->categoryId;
         $resource->createdAt = $viewModel->createdAt;
         $resource->updatedAt = $viewModel->updatedAt;
         $resource->deletedAt = $viewModel->deletedAt;

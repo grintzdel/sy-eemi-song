@@ -30,7 +30,8 @@ final class UpdateAlbumProcessor implements ProcessorInterface
         $command = new UpdateAlbumCommand(
             id: $id,
             authorId: $data->authorId,
-            name: $data->name
+            name: $data->name,
+            categoryId: $data->categoryId
         );
 
         $albumViewModel = $this->handle($command);
@@ -38,6 +39,7 @@ final class UpdateAlbumProcessor implements ProcessorInterface
         $data->id = $albumViewModel->id;
         $data->authorId = $albumViewModel->authorId;
         $data->name = $albumViewModel->name;
+        $data->categoryId = $albumViewModel->categoryId;
         $data->createdAt = $albumViewModel->createdAt;
         $data->updatedAt = $albumViewModel->updatedAt;
         $data->deletedAt = $albumViewModel->deletedAt;

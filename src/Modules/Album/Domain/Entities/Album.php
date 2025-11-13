@@ -6,6 +6,7 @@ namespace App\Modules\Album\Domain\Entities;
 
 use App\Modules\Album\Domain\ValueObjects\AlbumId;
 use App\Modules\Album\Domain\ValueObjects\AlbumName;
+use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 use App\Modules\Song\Domain\ValueObjects\UserId;
 
 class Album
@@ -14,6 +15,7 @@ class Album
         private readonly AlbumId            $id,
         private readonly UserId             $authorId,
         private AlbumName                   $name,
+        private ?CategoryId                 $categoryId,
         private readonly \DateTimeImmutable $createdAt,
         private \DateTimeImmutable          $updatedAt,
         private ?\DateTimeImmutable         $deletedAt = null
@@ -22,7 +24,8 @@ class Album
     public static function create(
         AlbumId $id,
         UserId $authorId,
-        AlbumName $name
+        AlbumName $name,
+        ?CategoryId $categoryId = null
     ): self
     {
         $now = new \DateTimeImmutable();
@@ -30,14 +33,16 @@ class Album
             id: $id,
             authorId: $authorId,
             name: $name,
+            categoryId: $categoryId,
             createdAt: $now,
             updatedAt: $now
         );
     }
 
-    public function update(AlbumName $name): void
+    public function update(AlbumName $name, ?CategoryId $categoryId = null): void
     {
         $this->name = $name;
+        $this->categoryId = $categoryId;
         $this->updatedAt = new \DateTimeImmutable();
     }
 
@@ -76,6 +81,11 @@ class Album
     public function getName(): AlbumName
     {
         return $this->name;
+    }
+
+    public function getCategoryId(): ?CategoryId
+    {
+        return $this->categoryId;
     }
 
     public function getCreatedAt(): \DateTimeImmutable

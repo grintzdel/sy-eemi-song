@@ -18,7 +18,10 @@ final readonly class CreateAlbumCommand
             max: 255,
             maxMessage: 'Album name cannot exceed {{ limit }} characters'
         )]
-        private string $name
+        private string $name,
+
+        #[Assert\Uuid(message: 'Category ID must be a valid UUID')]
+        private ?string $categoryId = null
     ) {}
 
     public function getAuthorId(): string
@@ -29,5 +32,10 @@ final readonly class CreateAlbumCommand
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getCategoryId(): ?string
+    {
+        return $this->categoryId;
     }
 }

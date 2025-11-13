@@ -11,6 +11,7 @@ use App\Modules\Album\Domain\Exceptions\UnauthorizedAlbumAccessException;
 use App\Modules\Album\Domain\Repositories\IAlbumRepository;
 use App\Modules\Album\Domain\ValueObjects\AlbumId;
 use App\Modules\Album\Domain\ValueObjects\AlbumName;
+use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 use App\Modules\Song\Domain\ValueObjects\UserId;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -43,7 +44,14 @@ final readonly class UpdateAlbumCommandHandler
             );
         }
 
-        $album->update(new AlbumName($command->getName()));
+        $categoryId = $command->getCategoryId() !== null
+            ? new CategoryId($command->getCategoryId())
+            : null;
+
+        $album->update(
+            name: new AlbumName($command->getName()),
+            categoryId: $categoryId
+        );
 
         $this->albumRepository->save($album);
 
@@ -51,6 +59,7 @@ final readonly class UpdateAlbumCommandHandler
             id: $album->getId()->getValue(),
             authorId: $album->getAuthorId()->getValue(),
             name: $album->getName()->getValue(),
+            categoryId: $album->getCategoryId()?->getValue(),
             createdAt: $album->getCreatedAt(),
             updatedAt: $album->getUpdatedAt(),
             deletedAt: $album->getDeletedAt()

@@ -10,6 +10,7 @@ use App\Modules\Album\Domain\Repositories\IAlbumRepository;
 use App\Modules\Album\Domain\ValueObjects\AlbumId;
 use App\Modules\Album\Domain\ValueObjects\AlbumName;
 use App\Modules\Album\Infrastructure\Doctrine\Entities\AlbumEntity;
+use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 use App\Modules\Song\Domain\ValueObjects\UserId;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -89,10 +90,15 @@ class SqlAlbumRepository extends ServiceEntityRepository implements IAlbumReposi
      */
     private function toDomain(AlbumEntity $entity): Album
     {
+        $categoryId = $entity->getCategoryId() !== null
+            ? new CategoryId($entity->getCategoryId())
+            : null;
+
         return new Album(
             id: new AlbumId($entity->getId()),
             authorId: new UserId($entity->getAuthorId()),
             name: new AlbumName($entity->getName()),
+            categoryId: $categoryId,
             createdAt: $entity->getCreatedAt(),
             updatedAt: $entity->getUpdatedAt(),
             deletedAt: $entity->getDeletedAt()
@@ -105,6 +111,7 @@ class SqlAlbumRepository extends ServiceEntityRepository implements IAlbumReposi
             id: $album->getId()->getValue(),
             authorId: $album->getAuthorId()->getValue(),
             name: $album->getName()->getValue(),
+            categoryId: $album->getCategoryId()?->getValue(),
             createdAt: $album->getCreatedAt(),
             updatedAt: $album->getUpdatedAt(),
             deletedAt: $album->getDeletedAt()
@@ -114,6 +121,7 @@ class SqlAlbumRepository extends ServiceEntityRepository implements IAlbumReposi
     private function updateEntity(AlbumEntity $entity, Album $album): void
     {
         $entity->setName($album->getName()->getValue());
+        $entity->setCategoryId($album->getCategoryId()?->getValue());
         $entity->setUpdatedAt($album->getUpdatedAt());
         $entity->setDeletedAt($album->getDeletedAt());
     }
