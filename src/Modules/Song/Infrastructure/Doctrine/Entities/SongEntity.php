@@ -14,7 +14,7 @@ class SongEntity
     #[ORM\Column(type: 'string', length: 36)]
     private string $id;
 
-    #[ORM\Column(type: 'string', length: 36, name: 'artist_id')]
+    #[ORM\Column(name: 'artist_id', type: 'string', length: 36)]
     private string $artistId;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -32,13 +32,13 @@ class SongEntity
     #[ORM\Column(type: 'integer')]
     private int $duration;
 
-    #[ORM\Column(type: 'datetime_immutable', name: 'created_at')]
+    #[ORM\Column(name: 'created_at', type: 'datetime_immutable')]
     private \DateTimeImmutable $createdAt;
 
-    #[ORM\Column(type: 'datetime_immutable', name: 'updated_at')]
+    #[ORM\Column(name: 'updated_at', type: 'datetime_immutable')]
     private \DateTimeImmutable $updatedAt;
 
-    #[ORM\Column(type: 'datetime_immutable', nullable: true, name: 'deleted_at')]
+    #[ORM\Column(name: 'deleted_at', type: 'datetime_immutable', nullable: true)]
     private ?\DateTimeImmutable $deletedAt;
 
     public function __construct(

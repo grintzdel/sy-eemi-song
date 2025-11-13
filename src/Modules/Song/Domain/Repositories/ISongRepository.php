@@ -10,18 +10,18 @@ use App\Modules\Song\Domain\ValueObjects\UserId;
 
 interface ISongRepository
 {
+    /*
+     * Queries
+     */
     public function findById(SongId $id): ?Song;
 
-    /**
-     * @return Song[]
-     */
     public function findByArtistId(UserId $artistId): array;
 
-    /**
-     * @return Song[]
-     */
     public function findAll(): array;
 
+    /*
+     * Commands
+     */
     public function save(Song $song): void;
 
     public function delete(SongId $id): void;

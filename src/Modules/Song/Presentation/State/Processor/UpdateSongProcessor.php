@@ -39,7 +39,6 @@ final class UpdateSongProcessor implements ProcessorInterface
 
         $songViewModel = $this->handle($command);
 
-        // Map the updated song back to the resource
         $data->id = $songViewModel->id;
         $data->artistId = $songViewModel->artistId;
         $data->name = $songViewModel->name;
