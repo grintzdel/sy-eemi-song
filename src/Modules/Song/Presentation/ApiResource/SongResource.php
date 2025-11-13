@@ -15,6 +15,9 @@ use App\Modules\Song\Presentation\State\Processor\CreateSongProcessor;
 use App\Modules\Song\Presentation\State\Processor\DeleteSongProcessor;
 use App\Modules\Song\Presentation\State\Processor\UpdateSongProcessor;
 use App\Modules\Song\Presentation\State\Provider\GetSongProvider;
+use App\Modules\Song\Presentation\State\Provider\GetSongsByAlbumProvider;
+use App\Modules\Song\Presentation\State\Provider\GetSongsByCategoryProvider;
+use App\Modules\Song\Presentation\State\Provider\GetSongsByTagProvider;
 use App\Modules\Song\Presentation\State\Provider\ListSongsProvider;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -24,6 +27,21 @@ use Symfony\Component\Validator\Constraints as Assert;
         new GetCollection(
             security: 'is_granted("PUBLIC_ACCESS")',
             provider: ListSongsProvider::class
+        ),
+        new GetCollection(
+            uriTemplate: '/songs/tag/{tagId}',
+            security: 'is_granted("PUBLIC_ACCESS")',
+            provider: GetSongsByTagProvider::class
+        ),
+        new GetCollection(
+            uriTemplate: '/songs/category/{categoryId}',
+            security: 'is_granted("PUBLIC_ACCESS")',
+            provider: GetSongsByCategoryProvider::class
+        ),
+        new GetCollection(
+            uriTemplate: '/songs/album/{albumId}',
+            security: 'is_granted("PUBLIC_ACCESS")',
+            provider: GetSongsByAlbumProvider::class
         ),
         new Get(
             security: 'is_granted("PUBLIC_ACCESS")',
