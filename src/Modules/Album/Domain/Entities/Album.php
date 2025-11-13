@@ -7,7 +7,7 @@ namespace App\Modules\Album\Domain\Entities;
 use App\Modules\Album\Domain\ValueObjects\AlbumId;
 use App\Modules\Album\Domain\ValueObjects\AlbumName;
 use App\Modules\Shared\Domain\ValueObjects\CategoryId;
-use App\Modules\Song\Domain\ValueObjects\UserId;
+use App\Modules\Shared\Domain\ValueObjects\UserId;
 
 class Album
 {

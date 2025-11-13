@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Modules\Song\Application\Queries\ListSongs;
 
+use App\Modules\Shared\Domain\ValueObjects\UserId;
 use App\Modules\Song\Application\ViewModels\SongViewModel;
 use App\Modules\Song\Domain\Repositories\ISongRepository;
-use App\Modules\Song\Domain\ValueObjects\UserId;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]

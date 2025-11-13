@@ -6,7 +6,7 @@ namespace App\Modules\Album\Application\Queries\ListAlbums;
 
 use App\Modules\Album\Application\ViewModels\AlbumViewModel;
 use App\Modules\Album\Domain\Repositories\IAlbumRepository;
-use App\Modules\Song\Domain\ValueObjects\UserId;
+use App\Modules\Shared\Domain\ValueObjects\UserId;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]

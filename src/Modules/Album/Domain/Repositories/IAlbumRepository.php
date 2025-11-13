@@ -6,7 +6,7 @@ namespace App\Modules\Album\Domain\Repositories;
 
 use App\Modules\Album\Domain\Entities\Album;
 use App\Modules\Album\Domain\ValueObjects\AlbumId;
-use App\Modules\Song\Domain\ValueObjects\UserId;
+use App\Modules\Shared\Domain\ValueObjects\UserId;
 
 interface IAlbumRepository
 {

@@ -8,7 +8,7 @@ use App\Modules\Album\Domain\Exceptions\AlbumNotFoundException;
 use App\Modules\Album\Domain\Exceptions\UnauthorizedAlbumAccessException;
 use App\Modules\Album\Domain\Repositories\IAlbumRepository;
 use App\Modules\Album\Domain\ValueObjects\AlbumId;
-use App\Modules\Song\Domain\ValueObjects\UserId;
+use App\Modules\Shared\Domain\ValueObjects\UserId;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
