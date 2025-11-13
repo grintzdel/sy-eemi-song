@@ -10,7 +10,7 @@ use App\Modules\Category\Domain\Exceptions\DuplicateCategoryNameException;
 use App\Modules\Category\Domain\Exceptions\InvalidCategoryNameException;
 use App\Modules\Category\Domain\Repositories\ICategoryRepository;
 use App\Modules\Category\Domain\ValueObjects\CategoryName;
-use App\Modules\Category\Domain\ValueObjects\Description;
+use App\Modules\Category\Domain\ValueObjects\CategoryDescription;
 use App\Modules\Shared\Application\Ports\Services\IIdProvider;
 use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
@@ -38,7 +38,7 @@ final readonly class CreateCategoryCommandHandler
         $category = Category::create(
             id: new CategoryId($this->idProvider->generateId()),
             name: $name,
-            description: new Description($command->getDescription())
+            description: new CategoryDescription($command->getDescription())
         );
 
         $this->categoryRepository->save($category);

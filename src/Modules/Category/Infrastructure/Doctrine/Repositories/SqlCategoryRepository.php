@@ -9,7 +9,7 @@ use App\Modules\Category\Domain\Exceptions\InvalidCategoryNameException;
 use App\Modules\Category\Domain\Repositories\ICategoryRepository;
 use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 use App\Modules\Category\Domain\ValueObjects\CategoryName;
-use App\Modules\Category\Domain\ValueObjects\Description;
+use App\Modules\Category\Domain\ValueObjects\CategoryDescription;
 use App\Modules\Category\Infrastructure\Doctrine\Entities\CategoryEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -104,7 +104,7 @@ class SqlCategoryRepository extends ServiceEntityRepository implements ICategory
         return new Category(
             id: new CategoryId($entity->getId()),
             name: new CategoryName($entity->getName()),
-            description: new Description($entity->getDescription()),
+            description: new CategoryDescription($entity->getDescription()),
             createdAt: $entity->getCreatedAt(),
             updatedAt: $entity->getUpdatedAt(),
             deletedAt: $entity->getDeletedAt()

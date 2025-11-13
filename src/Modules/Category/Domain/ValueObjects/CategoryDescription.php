@@ -6,7 +6,7 @@ namespace App\Modules\Category\Domain\ValueObjects;
 
 use Webmozart\Assert\Assert;
 
-final readonly class Description
+final readonly class CategoryDescription
 {
     public function __construct(
         private ?string $value

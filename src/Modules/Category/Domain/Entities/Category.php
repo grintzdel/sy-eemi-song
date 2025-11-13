@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\Category\Domain\Entities;
 
 use App\Modules\Category\Domain\ValueObjects\CategoryName;
-use App\Modules\Category\Domain\ValueObjects\Description;
+use App\Modules\Category\Domain\ValueObjects\CategoryDescription;
 use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 
 final class Category
@@ -13,7 +13,7 @@ final class Category
     public function __construct(
         private readonly CategoryId         $id,
         private CategoryName                $name,
-        private Description                 $description,
+        private CategoryDescription         $description,
         private readonly \DateTimeImmutable $createdAt,
         private \DateTimeImmutable          $updatedAt,
         private ?\DateTimeImmutable         $deletedAt = null
@@ -22,7 +22,7 @@ final class Category
     public static function create(
         CategoryId $id,
         CategoryName $name,
-        Description $description
+        CategoryDescription $description
     ): self
     {
         $now = new \DateTimeImmutable();
@@ -36,7 +36,7 @@ final class Category
         );
     }
 
-    public function update(CategoryName $name, Description $description): void
+    public function update(CategoryName $name, CategoryDescription $description): void
     {
         $this->name = $name;
         $this->description = $description;
@@ -70,7 +70,7 @@ final class Category
         return $this->name;
     }
 
-    public function getDescription(): Description
+    public function getDescription(): CategoryDescription
     {
         return $this->description;
     }
