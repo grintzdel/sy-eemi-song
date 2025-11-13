@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Song\Application\Commands\CreateSong;
 
-use App\Modules\Song\Application\Ports\Services\IIdProvider;
+use App\Modules\Shared\Application\Ports\Services\IIdProvider;
 use App\Modules\Song\Application\ViewModels\IdViewModel;
 use App\Modules\Song\Domain\Entities\Song;
 use App\Modules\Song\Domain\Exceptions\InvalidCategoryException;

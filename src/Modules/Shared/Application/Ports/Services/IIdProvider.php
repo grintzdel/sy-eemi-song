@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Modules\Song\Application\Ports\Services;
+namespace App\Modules\Shared\Application\Ports\Services;
 
 interface IIdProvider
 {
