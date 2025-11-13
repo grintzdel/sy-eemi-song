@@ -28,8 +28,7 @@ final class CreateSongProcessor implements ProcessorInterface
         $command = new CreateSongCommand(
             artistId: $data->artistId,
             name: $data->name,
-            category: $data->category,
-            album: $data->album,
+            categoryId: $data->categoryId,
             tag: $data->tag,
             duration: $data->duration
         );

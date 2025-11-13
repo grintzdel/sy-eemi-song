@@ -7,7 +7,7 @@ namespace App\Modules\Category\Application\Queries\GetCategory;
 use App\Modules\Category\Application\ViewModels\CategoryViewModel;
 use App\Modules\Category\Domain\Exceptions\CategoryNotFoundException;
 use App\Modules\Category\Domain\Repositories\ICategoryRepository;
-use App\Modules\Category\Domain\ValueObjects\CategoryId;
+use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]

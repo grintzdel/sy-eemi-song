@@ -9,9 +9,9 @@ use App\Modules\Category\Domain\Exceptions\CategoryNotFoundException;
 use App\Modules\Category\Domain\Exceptions\DuplicateCategoryNameException;
 use App\Modules\Category\Domain\Exceptions\InvalidCategoryNameException;
 use App\Modules\Category\Domain\Repositories\ICategoryRepository;
-use App\Modules\Category\Domain\ValueObjects\CategoryId;
 use App\Modules\Category\Domain\ValueObjects\CategoryName;
 use App\Modules\Category\Domain\ValueObjects\Description;
+use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]

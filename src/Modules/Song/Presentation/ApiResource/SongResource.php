@@ -60,12 +60,9 @@ class SongResource
     #[Assert\Length(max: 255, maxMessage: 'Song name cannot exceed 255 characters')]
     public string $name;
 
-    #[Assert\NotBlank(message: 'Category is required')]
-    #[Assert\Length(max: 100, maxMessage: 'Category cannot exceed 100 characters')]
-    public string $category;
-
-    #[Assert\Length(max: 255, maxMessage: 'Album name cannot exceed 255 characters')]
-    public ?string $album = null;
+    #[Assert\NotBlank(message: 'Category ID is required')]
+    #[Assert\Uuid(message: 'Category ID must be a valid UUID')]
+    public string $categoryId;
 
     #[Assert\Length(max: 100, maxMessage: 'Tag cannot exceed 100 characters')]
     public ?string $tag = null;

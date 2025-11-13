@@ -22,8 +22,8 @@ class SongEntity
     #[ORM\Column(type: 'string', length: 255)]
     private string $name;
 
-    #[ORM\Column(type: 'string', length: 100)]
-    private string $category;
+    #[ORM\Column(name: 'category_id', type: 'string', length: 36)]
+    private string $categoryId;
 
     #[ORM\ManyToMany(targetEntity: 'App\Modules\Album\Infrastructure\Doctrine\Entities\AlbumEntity', inversedBy: 'songs')]
     #[ORM\JoinTable(name: 'song_albums')]
@@ -50,7 +50,7 @@ class SongEntity
         string $id,
         string $artistId,
         string $name,
-        string $category,
+        string $categoryId,
         ?string $tag,
         int $duration,
         \DateTimeImmutable $createdAt,
@@ -61,7 +61,7 @@ class SongEntity
         $this->id = $id;
         $this->artistId = $artistId;
         $this->name = $name;
-        $this->category = $category;
+        $this->categoryId = $categoryId;
         $this->tag = $tag;
         $this->duration = $duration;
         $this->createdAt = $createdAt;
@@ -90,14 +90,14 @@ class SongEntity
         $this->name = $name;
     }
 
-    public function getCategory(): string
+    public function getCategoryId(): string
     {
-        return $this->category;
+        return $this->categoryId;
     }
 
-    public function setCategory(string $category): void
+    public function setCategoryId(string $categoryId): void
     {
-        $this->category = $category;
+        $this->categoryId = $categoryId;
     }
 
     public function getAlbums(): Collection

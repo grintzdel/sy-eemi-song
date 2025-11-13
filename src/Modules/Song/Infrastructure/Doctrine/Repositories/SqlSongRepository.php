@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace App\Modules\Song\Infrastructure\Doctrine\Repositories;
 
+use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 use App\Modules\Song\Domain\Entities\Song;
-use App\Modules\Song\Domain\Exceptions\InvalidCategoryException;
 use App\Modules\Song\Domain\Exceptions\InvalidDurationException;
 use App\Modules\Song\Domain\Exceptions\InvalidSongNameException;
 use App\Modules\Song\Domain\Repositories\ISongRepository;
-use App\Modules\Song\Domain\ValueObjects\Album;
-use App\Modules\Song\Domain\ValueObjects\Category;
 use App\Modules\Song\Domain\ValueObjects\Duration;
 use App\Modules\Song\Domain\ValueObjects\SongId;
 use App\Modules\Song\Domain\ValueObjects\SongName;
@@ -33,7 +31,6 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
     /**
      * @throws InvalidSongNameException
      * @throws InvalidDurationException
-     * @throws InvalidCategoryException
      */
     public function findById(SongId $id): ?Song
     {
@@ -45,7 +42,6 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
     /**
      * @throws InvalidSongNameException
      * @throws InvalidDurationException
-     * @throws InvalidCategoryException
      */
     public function findByArtistId(UserId $artistId): array
     {
@@ -59,7 +55,6 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
 
     /**
      * @throws InvalidSongNameException
-     * @throws InvalidCategoryException
      * @throws InvalidDurationException
      */
     public function findAll(): array
@@ -98,7 +93,6 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
 
     /**
      * @throws InvalidSongNameException
-     * @throws InvalidCategoryException
      * @throws InvalidDurationException
      */
     private function toDomain(SongEntity $entity): Song
@@ -107,8 +101,7 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
             id: new SongId($entity->getId()),
             artistId: new UserId($entity->getArtistId()),
             name: new SongName($entity->getName()),
-            category: new Category($entity->getCategory()),
-            album: new Album(''),
+            categoryId: new CategoryId($entity->getCategoryId()),
             tag: new Tag($entity->getTag()),
             duration: new Duration($entity->getDuration()),
             createdAt: $entity->getCreatedAt(),
@@ -123,7 +116,7 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
             id: $song->getId()->getValue(),
             artistId: $song->getArtistId()->getValue(),
             name: $song->getName()->getValue(),
-            category: $song->getCategory()->getValue(),
+            categoryId: $song->getCategoryId()->getValue(),
             tag: $song->getTag()->getValue(),
             duration: $song->getDuration()->getSeconds(),
             createdAt: $song->getCreatedAt(),
@@ -135,7 +128,7 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
     private function updateEntity(SongEntity $entity, Song $song): void
     {
         $entity->setName($song->getName()->getValue());
-        $entity->setCategory($song->getCategory()->getValue());
+        $entity->setCategoryId($song->getCategoryId()->getValue());
         $entity->setTag($song->getTag()->getValue());
         $entity->setDuration($song->getDuration()->getSeconds());
         $entity->setUpdatedAt($song->getUpdatedAt());

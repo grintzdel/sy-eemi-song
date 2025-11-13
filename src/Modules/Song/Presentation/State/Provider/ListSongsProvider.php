@@ -43,8 +43,7 @@ final class ListSongsProvider implements ProviderInterface
         $resource->id = $viewModel->id;
         $resource->artistId = $viewModel->artistId;
         $resource->name = $viewModel->name;
-        $resource->category = $viewModel->category;
-        $resource->album = $viewModel->album;
+        $resource->categoryId = $viewModel->categoryId;
         $resource->tag = $viewModel->tag;
         $resource->duration = $viewModel->duration;
         $resource->durationFormatted = $viewModel->durationFormatted;

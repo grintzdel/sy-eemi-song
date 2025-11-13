@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Modules\Category\Domain\ValueObjects;
+namespace App\Modules\Shared\Domain\ValueObjects;
 
 use Webmozart\Assert\Assert;
 
@@ -18,5 +18,10 @@ final readonly class CategoryId
     public function getValue(): string
     {
         return $this->value;
+    }
+
+    public function equals(CategoryId $other): bool
+    {
+        return $this->value === $other->value;
     }
 }

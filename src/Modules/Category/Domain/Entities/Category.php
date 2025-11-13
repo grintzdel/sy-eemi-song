@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Modules\Category\Domain\Entities;
 
-use App\Modules\Category\Domain\ValueObjects\CategoryId;
 use App\Modules\Category\Domain\ValueObjects\CategoryName;
 use App\Modules\Category\Domain\ValueObjects\Description;
+use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 
 final class Category
 {

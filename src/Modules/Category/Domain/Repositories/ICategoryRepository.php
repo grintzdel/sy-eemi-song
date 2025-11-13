@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Modules\Category\Domain\Repositories;
 
 use App\Modules\Category\Domain\Entities\Category;
-use App\Modules\Category\Domain\ValueObjects\CategoryId;
 use App\Modules\Category\Domain\ValueObjects\CategoryName;
+use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 
 interface ICategoryRepository
 {

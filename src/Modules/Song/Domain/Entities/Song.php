@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Song\Domain\Entities;
 
-use App\Modules\Song\Domain\ValueObjects\Album;
-use App\Modules\Song\Domain\ValueObjects\Category;
+use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 use App\Modules\Song\Domain\ValueObjects\Duration;
 use App\Modules\Song\Domain\ValueObjects\SongId;
 use App\Modules\Song\Domain\ValueObjects\SongName;
@@ -18,8 +17,7 @@ class Song
         private readonly SongId             $id,
         private readonly UserId             $artistId,
         private SongName                    $name,
-        private Category                    $category,
-        private Album                       $album,
+        private CategoryId                  $categoryId,
         private Tag                         $tag,
         private Duration                    $duration,
         private readonly \DateTimeImmutable $createdAt,
@@ -31,8 +29,7 @@ class Song
         SongId $id,
         UserId $artistId,
         SongName $name,
-        Category $category,
-        Album $album,
+        CategoryId $categoryId,
         Tag $tag,
         Duration $duration
     ): self
@@ -43,8 +40,7 @@ class Song
             $id,
             $artistId,
             $name,
-            $category,
-            $album,
+            $categoryId,
             $tag,
             $duration,
             $now,
@@ -54,15 +50,13 @@ class Song
 
     public function update(
         SongName $name,
-        Category $category,
-        Album $album,
+        CategoryId $categoryId,
         Tag $tag,
         Duration $duration
     ): void
     {
         $this->name = $name;
-        $this->category = $category;
-        $this->album = $album;
+        $this->categoryId = $categoryId;
         $this->tag = $tag;
         $this->duration = $duration;
         $this->updatedAt = new \DateTimeImmutable();
@@ -106,14 +100,9 @@ class Song
         return $this->name;
     }
 
-    public function getCategory(): Category
+    public function getCategoryId(): CategoryId
     {
-        return $this->category;
-    }
-
-    public function getAlbum(): Album
-    {
-        return $this->album;
+        return $this->categoryId;
     }
 
     public function getTag(): Tag

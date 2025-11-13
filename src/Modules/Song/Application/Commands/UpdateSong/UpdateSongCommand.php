@@ -20,12 +20,9 @@ final readonly class UpdateSongCommand
     #[Assert\Length(max: 255, maxMessage: 'Song name cannot exceed 255 characters')]
     private string $name;
 
-    #[Assert\NotBlank(message: 'Category is required')]
-    #[Assert\Length(max: 100, maxMessage: 'Category cannot exceed 100 characters')]
-    private string $category;
-
-    #[Assert\Length(max: 255, maxMessage: 'Album name cannot exceed 255 characters')]
-    private ?string $album;
+    #[Assert\NotBlank(message: 'Category ID is required')]
+    #[Assert\Uuid(message: 'Category ID must be a valid UUID')]
+    private string $categoryId;
 
     #[Assert\Length(max: 100, maxMessage: 'Tag cannot exceed 100 characters')]
     private ?string $tag;
@@ -39,8 +36,7 @@ final readonly class UpdateSongCommand
         string $id,
         string $artistId,
         string $name,
-        string $category,
-        ?string $album,
+        string $categoryId,
         ?string $tag,
         int $duration
     )
@@ -48,8 +44,7 @@ final readonly class UpdateSongCommand
         $this->id = $id;
         $this->artistId = $artistId;
         $this->name = $name;
-        $this->category = $category;
-        $this->album = $album;
+        $this->categoryId = $categoryId;
         $this->tag = $tag;
         $this->duration = $duration;
     }
@@ -69,14 +64,9 @@ final readonly class UpdateSongCommand
         return $this->name;
     }
 
-    public function getCategory(): string
+    public function getCategoryId(): string
     {
-        return $this->category;
-    }
-
-    public function getAlbum(): ?string
-    {
-        return $this->album;
+        return $this->categoryId;
     }
 
     public function getTag(): ?string

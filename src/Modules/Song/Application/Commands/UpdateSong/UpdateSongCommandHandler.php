@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace App\Modules\Song\Application\Commands\UpdateSong;
 
+use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 use App\Modules\Song\Application\ViewModels\SongViewModel;
-use App\Modules\Song\Domain\Exceptions\InvalidCategoryException;
 use App\Modules\Song\Domain\Exceptions\InvalidDurationException;
 use App\Modules\Song\Domain\Exceptions\InvalidSongNameException;
 use App\Modules\Song\Domain\Exceptions\SongNotFoundException;
 use App\Modules\Song\Domain\Exceptions\UnauthorizedSongAccessException;
 use App\Modules\Song\Domain\Repositories\ISongRepository;
-use App\Modules\Song\Domain\ValueObjects\Album;
-use App\Modules\Song\Domain\ValueObjects\Category;
 use App\Modules\Song\Domain\ValueObjects\Duration;
 use App\Modules\Song\Domain\ValueObjects\SongId;
 use App\Modules\Song\Domain\ValueObjects\SongName;
@@ -30,7 +28,6 @@ final readonly class UpdateSongCommandHandler
     }
 
     /**
-     * @throws InvalidCategoryException
      * @throws InvalidSongNameException
      * @throws UnauthorizedSongAccessException
      * @throws InvalidDurationException
@@ -55,8 +52,7 @@ final readonly class UpdateSongCommandHandler
 
         $song->update(
             name: new SongName($command->getName()),
-            category: new Category($command->getCategory()),
-            album: new Album($command->getAlbum()),
+            categoryId: new CategoryId($command->getCategoryId()),
             tag: new Tag($command->getTag()),
             duration: new Duration($command->getDuration())
         );
