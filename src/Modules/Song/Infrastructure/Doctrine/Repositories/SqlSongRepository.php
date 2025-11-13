@@ -108,7 +108,7 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
             artistId: new UserId($entity->getArtistId()),
             name: new SongName($entity->getName()),
             category: new Category($entity->getCategory()),
-            album: new Album($entity->getAlbum()),
+            album: new Album(''),
             tag: new Tag($entity->getTag()),
             duration: new Duration($entity->getDuration()),
             createdAt: $entity->getCreatedAt(),
@@ -124,7 +124,6 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
             artistId: $song->getArtistId()->getValue(),
             name: $song->getName()->getValue(),
             category: $song->getCategory()->getValue(),
-            album: $song->getAlbum()->getValue(),
             tag: $song->getTag()->getValue(),
             duration: $song->getDuration()->getSeconds(),
             createdAt: $song->getCreatedAt(),
@@ -137,7 +136,6 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
     {
         $entity->setName($song->getName()->getValue());
         $entity->setCategory($song->getCategory()->getValue());
-        $entity->setAlbum($song->getAlbum()->getValue());
         $entity->setTag($song->getTag()->getValue());
         $entity->setDuration($song->getDuration()->getSeconds());
         $entity->setUpdatedAt($song->getUpdatedAt());

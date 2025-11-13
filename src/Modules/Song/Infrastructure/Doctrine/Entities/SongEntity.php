@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Modules\Song\Infrastructure\Doctrine\Entities;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
@@ -23,8 +25,11 @@ class SongEntity
     #[ORM\Column(type: 'string', length: 100)]
     private string $category;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $album;
+    #[ORM\ManyToMany(targetEntity: 'App\Modules\Album\Infrastructure\Doctrine\Entities\AlbumEntity', inversedBy: 'songs')]
+    #[ORM\JoinTable(name: 'song_albums')]
+    #[ORM\JoinColumn(name: 'song_id', referencedColumnName: 'id')]
+    #[ORM\InverseJoinColumn(name: 'album_id', referencedColumnName: 'id')]
+    private Collection $albums;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
     private ?string $tag;
@@ -46,7 +51,6 @@ class SongEntity
         string $artistId,
         string $name,
         string $category,
-        ?string $album,
         ?string $tag,
         int $duration,
         \DateTimeImmutable $createdAt,
@@ -58,12 +62,12 @@ class SongEntity
         $this->artistId = $artistId;
         $this->name = $name;
         $this->category = $category;
-        $this->album = $album;
         $this->tag = $tag;
         $this->duration = $duration;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
         $this->deletedAt = $deletedAt;
+        $this->albums = new ArrayCollection();
     }
 
     public function getId(): string
@@ -96,14 +100,21 @@ class SongEntity
         $this->category = $category;
     }
 
-    public function getAlbum(): ?string
+    public function getAlbums(): Collection
     {
-        return $this->album;
+        return $this->albums;
     }
 
-    public function setAlbum(?string $album): void
+    public function addAlbum($album): void
     {
-        $this->album = $album;
+        if (!$this->albums->contains($album)) {
+            $this->albums->add($album);
+        }
+    }
+
+    public function removeAlbum($album): void
+    {
+        $this->albums->removeElement($album);
     }
 
     public function getTag(): ?string
