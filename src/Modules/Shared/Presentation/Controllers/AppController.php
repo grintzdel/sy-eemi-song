@@ -12,14 +12,10 @@ use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 abstract class AppController extends AbstractController
 {
-    private MessageBusInterface $commandBus;
-    private MessageBusInterface $queryBus;
-
-    public function __construct(MessageBusInterface $commandBus, MessageBusInterface $queryBus)
-    {
-        $this->commandBus = $commandBus;
-        $this->queryBus = $queryBus;
-    }
+    public function __construct(
+        private readonly MessageBusInterface $commandBus,
+        private readonly MessageBusInterface $queryBus
+    ) {}
 
     /**
      * @throws ExceptionInterface
