@@ -26,12 +26,16 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Modules/Category/Infrastructure/Doctrine/Entities'
                 prefix: 'App\Modules\Category\Infrastructure\Doctrine\Entities'
                 is_bundle: false
-            #User:
-                #type: attribute
-                #dir: '%kernel.project_dir%/src/Modules/User/Infrastructure/Doctrine/Entities'
-                #prefix: 'App\Modules\User\Infrastructure\Doctrine\Entities'
-                #is_bundle: false
-
+            User:
+                type: attribute
+                dir: '%kernel.project_dir%/src/Modules/User/Infrastructure/Doctrine/Entities'
+                prefix: 'App\Modules\User\Infrastructure\Doctrine\Entities'
+                is_bundle: false
+            Tag:
+                type: attribute
+                dir: '%kernel.project_dir%/src/Modules/Tag/Infrastructure/Doctrine/Entities'
+                prefix: 'App\Modules\Tag\Infrastructure\Doctrine\Entities'
+                is_bundle: false
 when@test:
     doctrine:
         dbal:
