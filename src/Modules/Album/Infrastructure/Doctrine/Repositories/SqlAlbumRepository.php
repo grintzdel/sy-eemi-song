@@ -12,6 +12,8 @@ use App\Modules\Album\Domain\ValueObjects\AlbumName;
 use App\Modules\Album\Infrastructure\Doctrine\Entities\AlbumEntity;
 use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 use App\Modules\Shared\Domain\ValueObjects\UserId;
+use App\Modules\Song\Domain\ValueObjects\SongId;
+use App\Modules\Song\Infrastructure\Doctrine\Entities\SongEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -127,5 +129,27 @@ class SqlAlbumRepository extends ServiceEntityRepository implements IAlbumReposi
         $entity->setCategoryId($album->getCategoryId()?->getValue());
         $entity->setUpdatedAt($album->getUpdatedAt());
         $entity->setDeletedAt($album->getDeletedAt());
+    }
+
+    public function addSongToAlbum(AlbumId $albumId, SongId $songId): void
+    {
+        $albumEntity = $this->find($albumId->getValue());
+        $songEntity = $this->getEntityManager()->getRepository(SongEntity::class)->find($songId->getValue());
+
+        if ($albumEntity && $songEntity) {
+            $songEntity->addAlbum($albumEntity);
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function removeSongFromAlbum(AlbumId $albumId, SongId $songId): void
+    {
+        $albumEntity = $this->find($albumId->getValue());
+        $songEntity = $this->getEntityManager()->getRepository(SongEntity::class)->find($songId->getValue());
+
+        if ($albumEntity && $songEntity) {
+            $songEntity->removeAlbum($albumEntity);
+            $this->getEntityManager()->flush();
+        }
     }
 }
