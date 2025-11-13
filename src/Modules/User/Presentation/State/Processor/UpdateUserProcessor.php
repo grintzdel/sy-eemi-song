@@ -11,7 +11,7 @@ use App\Modules\User\Presentation\ApiResource\UserResource;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final readonly class UpdateUserProcessor implements ProcessorInterface
+final class UpdateUserProcessor implements ProcessorInterface
 {
     use HandleTrait;
 

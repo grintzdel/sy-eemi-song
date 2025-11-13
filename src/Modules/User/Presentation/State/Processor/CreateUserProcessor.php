@@ -12,7 +12,7 @@ use App\Modules\User\Presentation\ApiResource\UserResource;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final readonly class CreateUserProcessor implements ProcessorInterface
+final class CreateUserProcessor implements ProcessorInterface
 {
     use HandleTrait;
 

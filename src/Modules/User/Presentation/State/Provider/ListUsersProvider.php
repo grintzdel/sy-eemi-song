@@ -11,7 +11,7 @@ use App\Modules\User\Presentation\ApiResource\UserResource;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final readonly class ListUsersProvider implements ProviderInterface
+final class ListUsersProvider implements ProviderInterface
 {
     use HandleTrait;
 
