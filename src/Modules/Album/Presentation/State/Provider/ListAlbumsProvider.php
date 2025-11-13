@@ -25,9 +25,9 @@ final class ListAlbumsProvider implements ProviderInterface
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): array
     {
         $filters = $context['filters'] ?? [];
-        $authorId = $filters['authorId'] ?? null;
+        $artistId = $filters['artistId'] ?? null;
 
-        $query = new ListAlbumsQuery($authorId);
+        $query = new ListAlbumsQuery($artistId);
         $albumViewModels = $this->handle($query);
 
         return array_map(
@@ -40,7 +40,7 @@ final class ListAlbumsProvider implements ProviderInterface
     {
         $resource = new AlbumResource();
         $resource->id = $viewModel->id;
-        $resource->authorId = $viewModel->authorId;
+        $resource->artistId = $viewModel->artistId;
         $resource->name = $viewModel->name;
         $resource->categoryId = $viewModel->categoryId;
         $resource->createdAt = $viewModel->createdAt;

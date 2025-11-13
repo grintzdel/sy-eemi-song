@@ -36,10 +36,10 @@ final readonly class UpdateAlbumCommandHandler
             throw AlbumNotFoundException::withId($command->getId());
         }
 
-        $requestingUserId = new UserId($command->getAuthorId());
+        $requestingUserId = new UserId($command->getArtistId());
         if (!$album->isOwnedBy($requestingUserId)) {
             throw UnauthorizedAlbumAccessException::forUser(
-                $command->getAuthorId(),
+                $command->getArtistId(),
                 $command->getId()
             );
         }
@@ -57,7 +57,7 @@ final readonly class UpdateAlbumCommandHandler
 
         return new AlbumViewModel(
             id: $album->getId()->getValue(),
-            authorId: $album->getAuthorId()->getValue(),
+            artistId: $album->getArtistId()->getValue(),
             name: $album->getName()->getValue(),
             categoryId: $album->getCategoryId()?->getValue(),
             createdAt: $album->getCreatedAt(),

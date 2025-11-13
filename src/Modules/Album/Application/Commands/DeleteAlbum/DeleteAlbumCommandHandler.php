@@ -31,10 +31,10 @@ final readonly class DeleteAlbumCommandHandler
             throw AlbumNotFoundException::withId($command->getId());
         }
 
-        $requestingUserId = new UserId($command->getAuthorId());
+        $requestingUserId = new UserId($command->getArtistId());
         if (!$album->isOwnedBy($requestingUserId)) {
             throw UnauthorizedAlbumAccessException::forUser(
-                $command->getAuthorId(),
+                $command->getArtistId(),
                 $command->getId()
             );
         }

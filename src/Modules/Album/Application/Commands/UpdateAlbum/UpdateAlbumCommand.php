@@ -13,9 +13,9 @@ final readonly class UpdateAlbumCommand
         #[Assert\Uuid(message: 'Album ID must be a valid UUID')]
         private string $id,
 
-        #[Assert\NotBlank(message: 'Author ID is required')]
-        #[Assert\Uuid(message: 'Author ID must be a valid UUID')]
-        private string $authorId,
+        #[Assert\NotBlank(message: 'Artist ID is required')]
+        #[Assert\Uuid(message: 'Artist ID must be a valid UUID')]
+        private string $artistId,
 
         #[Assert\NotBlank(message: 'Album name is required')]
         #[Assert\Length(
@@ -33,9 +33,9 @@ final readonly class UpdateAlbumCommand
         return $this->id;
     }
 
-    public function getAuthorId(): string
+    public function getArtistId(): string
     {
-        return $this->authorId;
+        return $this->artistId;
     }
 
     public function getName(): string

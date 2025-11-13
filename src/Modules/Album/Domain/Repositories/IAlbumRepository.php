@@ -15,7 +15,7 @@ interface IAlbumRepository
      */
     public function findById(AlbumId $id): ?Album;
 
-    public function findByAuthorId(UserId $authorId): array;
+    public function findByArtistId(UserId $artistId): array;
 
     public function findAll(): array;
 

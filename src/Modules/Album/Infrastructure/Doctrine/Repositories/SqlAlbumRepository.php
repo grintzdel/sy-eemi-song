@@ -38,10 +38,10 @@ class SqlAlbumRepository extends ServiceEntityRepository implements IAlbumReposi
     /**
      * @throws InvalidAlbumNameException
      */
-    public function findByAuthorId(UserId $authorId): array
+    public function findByArtistId(UserId $artistId): array
     {
         $entities = $this->findBy(
-            ['authorId' => $authorId->getValue(), 'deletedAt' => null],
+            ['artistId' => $artistId->getValue(), 'deletedAt' => null],
             ['createdAt' => 'DESC']
         );
 
@@ -96,7 +96,7 @@ class SqlAlbumRepository extends ServiceEntityRepository implements IAlbumReposi
 
         return new Album(
             id: new AlbumId($entity->getId()),
-            authorId: new UserId($entity->getAuthorId()),
+            artistId: new UserId($entity->getArtistId()),
             name: new AlbumName($entity->getName()),
             categoryId: $categoryId,
             createdAt: $entity->getCreatedAt(),
@@ -109,7 +109,7 @@ class SqlAlbumRepository extends ServiceEntityRepository implements IAlbumReposi
     {
         return new AlbumEntity(
             id: $album->getId()->getValue(),
-            authorId: $album->getAuthorId()->getValue(),
+            artistId: $album->getArtistId()->getValue(),
             name: $album->getName()->getValue(),
             categoryId: $album->getCategoryId()?->getValue(),
             createdAt: $album->getCreatedAt(),

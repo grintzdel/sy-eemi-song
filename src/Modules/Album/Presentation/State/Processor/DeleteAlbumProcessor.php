@@ -29,7 +29,7 @@ final class DeleteAlbumProcessor implements ProcessorInterface
 
         $command = new DeleteAlbumCommand(
             id: $id,
-            authorId: $data->authorId
+            artistId: $data->artistId
         );
 
         $this->handle($command);

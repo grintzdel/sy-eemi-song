@@ -26,7 +26,7 @@ final class CreateAlbumProcessor implements ProcessorInterface
     {
         /** @var AlbumResource $data */
         $command = new CreateAlbumCommand(
-            authorId: $data->authorId,
+            artistId: $data->artistId,
             name: $data->name,
             categoryId: $data->categoryId
         );
@@ -34,7 +34,7 @@ final class CreateAlbumProcessor implements ProcessorInterface
         $albumViewModel = $this->handle($command);
 
         $data->id = $albumViewModel->id;
-        $data->authorId = $albumViewModel->authorId;
+        $data->artistId = $albumViewModel->artistId;
         $data->name = $albumViewModel->name;
         $data->categoryId = $albumViewModel->categoryId;
         $data->createdAt = $albumViewModel->createdAt;

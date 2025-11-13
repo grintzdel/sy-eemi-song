@@ -9,9 +9,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 final readonly class CreateAlbumCommand
 {
     public function __construct(
-        #[Assert\NotBlank(message: 'Author ID is required')]
-        #[Assert\Uuid(message: 'Author ID must be a valid UUID')]
-        private string $authorId,
+        #[Assert\NotBlank(message: 'Artist ID is required')]
+        #[Assert\Uuid(message: 'Artist ID must be a valid UUID')]
+        private string $artistId,
 
         #[Assert\NotBlank(message: 'Album name is required')]
         #[Assert\Length(
@@ -24,9 +24,9 @@ final readonly class CreateAlbumCommand
         private ?string $categoryId = null
     ) {}
 
-    public function getAuthorId(): string
+    public function getArtistId(): string
     {
-        return $this->authorId;
+        return $this->artistId;
     }
 
     public function getName(): string

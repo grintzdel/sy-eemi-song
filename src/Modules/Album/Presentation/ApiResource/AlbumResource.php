@@ -47,9 +47,9 @@ class AlbumResource
 {
     public ?string $id = null;
 
-    #[Assert\NotBlank(message: 'Author ID is required')]
-    #[Assert\Uuid(message: 'Author ID must be a valid UUID')]
-    public ?string $authorId = null;
+    #[Assert\NotBlank(message: 'Artist ID is required')]
+    #[Assert\Uuid(message: 'Artist ID must be a valid UUID')]
+    public ?string $artistId = null;
 
     #[Assert\NotBlank(message: 'Album name is required')]
     #[Assert\Length(

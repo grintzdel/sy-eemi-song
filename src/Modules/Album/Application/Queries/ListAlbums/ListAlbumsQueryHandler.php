@@ -18,9 +18,9 @@ final readonly class ListAlbumsQueryHandler
 
     public function __invoke(ListAlbumsQuery $query): array
     {
-        if ($query->getAuthorId() !== null) {
-            $albums = $this->albumRepository->findByAuthorId(
-                new UserId($query->getAuthorId())
+        if ($query->getArtistId() !== null) {
+            $albums = $this->albumRepository->findByArtistId(
+                new UserId($query->getArtistId())
             );
         } else {
             $albums = $this->albumRepository->findAll();
@@ -29,7 +29,7 @@ final readonly class ListAlbumsQueryHandler
         return array_map(
             fn($album) => new AlbumViewModel(
                 id: $album->getId()->getValue(),
-                authorId: $album->getAuthorId()->getValue(),
+                artistId: $album->getArtistId()->getValue(),
                 name: $album->getName()->getValue(),
                 createdAt: $album->getCreatedAt(),
                 updatedAt: $album->getUpdatedAt(),

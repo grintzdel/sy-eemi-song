@@ -8,7 +8,7 @@ final readonly class AlbumViewModel
 {
     public function __construct(
         public string $id,
-        public string $authorId,
+        public string $artistId,
         public string $name,
         public ?string $categoryId,
         public \DateTimeImmutable $createdAt,

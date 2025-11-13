@@ -31,7 +31,7 @@ final readonly class GetAlbumQueryHandler
 
         return new AlbumViewModel(
             id: $album->getId()->getValue(),
-            authorId: $album->getAuthorId()->getValue(),
+            artistId: $album->getArtistId()->getValue(),
             name: $album->getName()->getValue(),
             createdAt: $album->getCreatedAt(),
             updatedAt: $album->getUpdatedAt(),

@@ -17,7 +17,7 @@ class AlbumEntity
     private string $id;
 
     #[ORM\Column(type: 'string', length: 36)]
-    private string $authorId;
+    private string $artistId;
 
     #[ORM\Column(type: 'string', length: 255)]
     private string $name;
@@ -39,7 +39,7 @@ class AlbumEntity
 
     public function __construct(
         string $id,
-        string $authorId,
+        string $artistId,
         string $name,
         ?string $categoryId,
         \DateTimeImmutable $createdAt,
@@ -48,7 +48,7 @@ class AlbumEntity
     )
     {
         $this->id = $id;
-        $this->authorId = $authorId;
+        $this->artistId = $artistId;
         $this->name = $name;
         $this->categoryId = $categoryId;
         $this->createdAt = $createdAt;
@@ -62,14 +62,14 @@ class AlbumEntity
         return $this->id;
     }
 
-    public function getAuthorId(): string
+    public function getArtistId(): string
     {
-        return $this->authorId;
+        return $this->artistId;
     }
 
-    public function setAuthorId(string $authorId): void
+    public function setArtistId(string $artistId): void
     {
-        $this->authorId = $authorId;
+        $this->artistId = $artistId;
     }
 
     public function getName(): string

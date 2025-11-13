@@ -13,7 +13,7 @@ class Album
 {
     public function __construct(
         private readonly AlbumId            $id,
-        private readonly UserId             $authorId,
+        private readonly UserId             $artistId,
         private AlbumName                   $name,
         private ?CategoryId                 $categoryId,
         private readonly \DateTimeImmutable $createdAt,
@@ -23,7 +23,7 @@ class Album
 
     public static function create(
         AlbumId $id,
-        UserId $authorId,
+        UserId $artistId,
         AlbumName $name,
         ?CategoryId $categoryId = null
     ): self
@@ -31,7 +31,7 @@ class Album
         $now = new \DateTimeImmutable();
         return new self(
             id: $id,
-            authorId: $authorId,
+            artistId: $artistId,
             name: $name,
             categoryId: $categoryId,
             createdAt: $now,
@@ -60,7 +60,7 @@ class Album
 
     public function isOwnedBy(UserId $userId): bool
     {
-        return $this->authorId->getValue() === $userId->getValue();
+        return $this->artistId->getValue() === $userId->getValue();
     }
 
     public function isDeleted(): bool
@@ -73,9 +73,9 @@ class Album
         return $this->id;
     }
 
-    public function getAuthorId(): UserId
+    public function getArtistId(): UserId
     {
-        return $this->authorId;
+        return $this->artistId;
     }
 
     public function getName(): AlbumName

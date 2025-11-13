@@ -7,11 +7,11 @@ namespace App\Modules\Album\Application\Queries\ListAlbums;
 final readonly class ListAlbumsQuery
 {
     public function __construct(
-        private ?string $authorId = null
+        private ?string $artistId = null
     ) {}
 
-    public function getAuthorId(): ?string
+    public function getArtistId(): ?string
     {
-        return $this->authorId;
+        return $this->artistId;
     }
 }

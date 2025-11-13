@@ -34,7 +34,7 @@ final readonly class CreateAlbumCommandHandler
 
         $album = Album::create(
             id: new AlbumId($this->idProvider->generateId()),
-            authorId: new UserId($command->getAuthorId()),
+            artistId: new UserId($command->getArtistId()),
             name: new AlbumName($command->getName()),
             categoryId: $categoryId
         );
@@ -43,7 +43,7 @@ final readonly class CreateAlbumCommandHandler
 
         return new AlbumViewModel(
             id: $album->getId()->getValue(),
-            authorId: $album->getAuthorId()->getValue(),
+            artistId: $album->getArtistId()->getValue(),
             name: $album->getName()->getValue(),
             categoryId: $album->getCategoryId()?->getValue(),
             createdAt: $album->getCreatedAt(),
