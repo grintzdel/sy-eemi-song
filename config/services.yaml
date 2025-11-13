@@ -18,3 +18,9 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Modules\Song\Domain\Repositories\ISongRepository:
+        class: App\Modules\Song\Infrastructure\Doctrine\Repositories\SqlSongRepository
+
+    App\Modules\Song\Application\Ports\Services\IIdProvider:
+        class: App\Modules\Song\Infrastructure\Services\UuidProvider
