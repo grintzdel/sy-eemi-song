@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Song\Infrastructure\Doctrine\Repositories;
 
+use App\Modules\Album\Domain\ValueObjects\AlbumId;
 use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 use App\Modules\Shared\Domain\ValueObjects\CoverImage;
 use App\Modules\Shared\Domain\ValueObjects\SongId;
@@ -53,6 +54,52 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
             ['artistId' => $artistId->getValue(), 'deletedAt' => null],
             ['createdAt' => 'DESC']
         );
+
+        return array_map(fn(SongEntity $entity) => $this->toDomain($entity), $entities);
+    }
+
+    /**
+     * @throws InvalidSongNameException
+     * @throws InvalidDurationException
+     */
+    public function findByTagId(TagId $tagId): array
+    {
+        $entities = $this->findBy(
+            ['tagId' => $tagId->getValue(), 'deletedAt' => null],
+            ['createdAt' => 'DESC']
+        );
+
+        return array_map(fn(SongEntity $entity) => $this->toDomain($entity), $entities);
+    }
+
+    /**
+     * @throws InvalidSongNameException
+     * @throws InvalidDurationException
+     */
+    public function findByCategoryId(CategoryId $categoryId): array
+    {
+        $entities = $this->findBy(
+            ['categoryId' => $categoryId->getValue(), 'deletedAt' => null],
+            ['createdAt' => 'DESC']
+        );
+
+        return array_map(fn(SongEntity $entity) => $this->toDomain($entity), $entities);
+    }
+
+    /**
+     * @throws InvalidSongNameException
+     * @throws InvalidDurationException
+     */
+    public function findByAlbumId(AlbumId $albumId): array
+    {
+        $qb = $this->createQueryBuilder('s');
+        $qb->innerJoin('s.albums', 'a')
+            ->where('a.id = :albumId')
+            ->andWhere('s.deletedAt IS NULL')
+            ->setParameter('albumId', $albumId->getValue())
+            ->orderBy('s.createdAt', 'DESC');
+
+        $entities = $qb->getQuery()->getResult();
 
         return array_map(fn(SongEntity $entity) => $this->toDomain($entity), $entities);
     }
