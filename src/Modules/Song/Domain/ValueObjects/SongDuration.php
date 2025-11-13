@@ -7,7 +7,7 @@ namespace App\Modules\Song\Domain\ValueObjects;
 use App\Modules\Song\Domain\Exceptions\InvalidDurationException;
 use Webmozart\Assert\Assert;
 
-final readonly class Duration
+final readonly class SongDuration
 {
     /**
      * @throws InvalidDurationException

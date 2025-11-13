@@ -11,7 +11,7 @@ use App\Modules\Song\Domain\Entities\Song;
 use App\Modules\Song\Domain\Exceptions\InvalidDurationException;
 use App\Modules\Song\Domain\Exceptions\InvalidSongNameException;
 use App\Modules\Song\Domain\Repositories\ISongRepository;
-use App\Modules\Song\Domain\ValueObjects\Duration;
+use App\Modules\Song\Domain\ValueObjects\SongDuration;
 use App\Modules\Song\Domain\ValueObjects\SongId;
 use App\Modules\Song\Domain\ValueObjects\SongName;
 use App\Modules\Song\Domain\ValueObjects\Tag;
@@ -38,7 +38,7 @@ final readonly class CreateSongCommandHandler
             name: new SongName($command->getName()),
             categoryId: new CategoryId($command->getCategoryId()),
             tag: new Tag($command->getTag()),
-            duration: new Duration($command->getDuration())
+            duration: new SongDuration($command->getDuration())
         );
 
         $this->songRepository->save($song);

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\Song\Domain\Entities;
 
 use App\Modules\Shared\Domain\ValueObjects\CategoryId;
-use App\Modules\Song\Domain\ValueObjects\Duration;
+use App\Modules\Song\Domain\ValueObjects\SongDuration;
 use App\Modules\Song\Domain\ValueObjects\SongId;
 use App\Modules\Song\Domain\ValueObjects\SongName;
 use App\Modules\Song\Domain\ValueObjects\Tag;
@@ -19,7 +19,7 @@ class Song
         private SongName                    $name,
         private CategoryId                  $categoryId,
         private Tag                         $tag,
-        private Duration                    $duration,
+        private SongDuration                $duration,
         private readonly \DateTimeImmutable $createdAt,
         private \DateTimeImmutable          $updatedAt,
         private ?\DateTimeImmutable         $deletedAt = null
@@ -31,7 +31,7 @@ class Song
         SongName $name,
         CategoryId $categoryId,
         Tag $tag,
-        Duration $duration
+        SongDuration $duration
     ): self
     {
         $now = new \DateTimeImmutable();
@@ -52,7 +52,7 @@ class Song
         SongName $name,
         CategoryId $categoryId,
         Tag $tag,
-        Duration $duration
+        SongDuration $duration
     ): void
     {
         $this->name = $name;
@@ -110,7 +110,7 @@ class Song
         return $this->tag;
     }
 
-    public function getDuration(): Duration
+    public function getDuration(): SongDuration
     {
         return $this->duration;
     }

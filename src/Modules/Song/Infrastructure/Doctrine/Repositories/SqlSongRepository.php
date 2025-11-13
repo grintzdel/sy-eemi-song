@@ -9,7 +9,7 @@ use App\Modules\Song\Domain\Entities\Song;
 use App\Modules\Song\Domain\Exceptions\InvalidDurationException;
 use App\Modules\Song\Domain\Exceptions\InvalidSongNameException;
 use App\Modules\Song\Domain\Repositories\ISongRepository;
-use App\Modules\Song\Domain\ValueObjects\Duration;
+use App\Modules\Song\Domain\ValueObjects\SongDuration;
 use App\Modules\Song\Domain\ValueObjects\SongId;
 use App\Modules\Song\Domain\ValueObjects\SongName;
 use App\Modules\Song\Domain\ValueObjects\Tag;
@@ -103,7 +103,7 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
             name: new SongName($entity->getName()),
             categoryId: new CategoryId($entity->getCategoryId()),
             tag: new Tag($entity->getTag()),
-            duration: new Duration($entity->getDuration()),
+            duration: new SongDuration($entity->getDuration()),
             createdAt: $entity->getCreatedAt(),
             updatedAt: $entity->getUpdatedAt(),
             deletedAt: $entity->getDeletedAt()
