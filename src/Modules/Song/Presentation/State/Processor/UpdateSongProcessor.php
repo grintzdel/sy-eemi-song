@@ -32,7 +32,7 @@ final class UpdateSongProcessor implements ProcessorInterface
             artistId: $data->artistId,
             name: $data->name,
             categoryId: $data->categoryId,
-            tag: $data->tag,
+            tagId: $data->tagId,
             duration: $data->duration,
             coverImage: $data->coverImage
         );
@@ -43,7 +43,7 @@ final class UpdateSongProcessor implements ProcessorInterface
         $data->artistId = $songViewModel->artistId;
         $data->name = $songViewModel->name;
         $data->categoryId = $songViewModel->categoryId;
-        $data->tag = $songViewModel->tag;
+        $data->tagId = $songViewModel->tagId;
         $data->duration = $songViewModel->duration;
         $data->coverImage = $songViewModel->coverImage;
         $data->durationFormatted = $songViewModel->durationFormatted;

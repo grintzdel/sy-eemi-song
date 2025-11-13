@@ -29,7 +29,7 @@ final class CreateSongProcessor implements ProcessorInterface
             artistId: $data->artistId,
             name: $data->name,
             categoryId: $data->categoryId,
-            tag: $data->tag,
+            tagId: $data->tagId,
             duration: $data->duration,
             coverImage: $data->coverImage
         );

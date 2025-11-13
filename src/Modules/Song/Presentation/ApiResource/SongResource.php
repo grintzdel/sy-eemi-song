@@ -65,7 +65,7 @@ class SongResource
     public string $categoryId;
 
     #[Assert\Length(max: 100, maxMessage: 'Tag cannot exceed 100 characters')]
-    public ?string $tag = null;
+    public ?string $tagId = null;
 
     #[Assert\NotBlank(message: 'Duration is required')]
     #[Assert\Positive(message: 'Duration must be greater than 0')]
