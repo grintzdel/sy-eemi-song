@@ -25,6 +25,9 @@ class AlbumEntity
     #[ORM\Column(name: 'category_id', type: 'string', length: 36, nullable: true)]
     private ?string $categoryId;
 
+    #[ORM\Column(name: 'cover_image', type: 'string', length: 500, nullable: true)]
+    private ?string $coverImage;
+
     #[ORM\Column(type: 'datetime_immutable')]
     private \DateTimeImmutable $createdAt;
 
@@ -42,6 +45,7 @@ class AlbumEntity
         string $artistId,
         string $name,
         ?string $categoryId,
+        ?string $coverImage,
         \DateTimeImmutable $createdAt,
         \DateTimeImmutable $updatedAt,
         ?\DateTimeImmutable $deletedAt = null
@@ -51,6 +55,7 @@ class AlbumEntity
         $this->artistId = $artistId;
         $this->name = $name;
         $this->categoryId = $categoryId;
+        $this->coverImage = $coverImage;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
         $this->deletedAt = $deletedAt;
@@ -90,6 +95,16 @@ class AlbumEntity
     public function setCategoryId(?string $categoryId): void
     {
         $this->categoryId = $categoryId;
+    }
+
+    public function getCoverImage(): ?string
+    {
+        return $this->coverImage;
+    }
+
+    public function setCoverImage(?string $coverImage): void
+    {
+        $this->coverImage = $coverImage;
     }
 
     public function getCreatedAt(): \DateTimeImmutable

@@ -11,6 +11,7 @@ use App\Modules\Album\Domain\ValueObjects\AlbumId;
 use App\Modules\Album\Domain\ValueObjects\AlbumName;
 use App\Modules\Album\Infrastructure\Doctrine\Entities\AlbumEntity;
 use App\Modules\Shared\Domain\ValueObjects\CategoryId;
+use App\Modules\Shared\Domain\ValueObjects\CoverImage;
 use App\Modules\Shared\Domain\ValueObjects\SongId;
 use App\Modules\Shared\Domain\ValueObjects\UserId;
 use App\Modules\Song\Infrastructure\Doctrine\Entities\SongEntity;
@@ -99,11 +100,16 @@ class SqlAlbumRepository extends ServiceEntityRepository implements IAlbumReposi
             ? new CategoryId($entity->getCategoryId())
             : null;
 
+        $coverImage = $entity->getCoverImage() !== null
+            ? new CoverImage($entity->getCoverImage())
+            : null;
+
         return new Album(
             id: new AlbumId($entity->getId()),
             artistId: new UserId($entity->getArtistId()),
             name: new AlbumName($entity->getName()),
             categoryId: $categoryId,
+            coverImage: $coverImage,
             createdAt: $entity->getCreatedAt(),
             updatedAt: $entity->getUpdatedAt(),
             deletedAt: $entity->getDeletedAt()
@@ -117,6 +123,7 @@ class SqlAlbumRepository extends ServiceEntityRepository implements IAlbumReposi
             artistId: $album->getArtistId()->getValue(),
             name: $album->getName()->getValue(),
             categoryId: $album->getCategoryId()?->getValue(),
+            coverImage: $album->getCoverImage()?->getValue(),
             createdAt: $album->getCreatedAt(),
             updatedAt: $album->getUpdatedAt(),
             deletedAt: $album->getDeletedAt()
@@ -127,6 +134,7 @@ class SqlAlbumRepository extends ServiceEntityRepository implements IAlbumReposi
     {
         $entity->setName($album->getName()->getValue());
         $entity->setCategoryId($album->getCategoryId()?->getValue());
+        $entity->setCoverImage($album->getCoverImage()?->getValue());
         $entity->setUpdatedAt($album->getUpdatedAt());
         $entity->setDeletedAt($album->getDeletedAt());
     }

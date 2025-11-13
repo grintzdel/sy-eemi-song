@@ -11,6 +11,7 @@ final readonly class AlbumViewModel
         public string $artistId,
         public string $name,
         public ?string $categoryId,
+        public ?string $coverImage,
         public \DateTimeImmutable $createdAt,
         public \DateTimeImmutable $updatedAt,
         public ?\DateTimeImmutable $deletedAt = null

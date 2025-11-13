@@ -61,6 +61,12 @@ class AlbumResource
     #[Assert\Uuid(message: 'Category ID must be a valid UUID')]
     public ?string $categoryId = null;
 
+    #[Assert\Length(
+        max: 500,
+        maxMessage: 'Cover image URL cannot exceed {{ limit }} characters'
+    )]
+    public ?string $coverImage = null;
+
     public ?\DateTimeImmutable $createdAt = null;
 
     public ?\DateTimeImmutable $updatedAt = null;

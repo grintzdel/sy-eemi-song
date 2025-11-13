@@ -31,7 +31,8 @@ final class UpdateAlbumProcessor implements ProcessorInterface
             id: $id,
             artistId: $data->artistId,
             name: $data->name,
-            categoryId: $data->categoryId
+            categoryId: $data->categoryId,
+            coverImage: $data->coverImage
         );
 
         $albumViewModel = $this->handle($command);
@@ -40,6 +41,7 @@ final class UpdateAlbumProcessor implements ProcessorInterface
         $data->artistId = $albumViewModel->artistId;
         $data->name = $albumViewModel->name;
         $data->categoryId = $albumViewModel->categoryId;
+        $data->coverImage = $albumViewModel->coverImage;
         $data->createdAt = $albumViewModel->createdAt;
         $data->updatedAt = $albumViewModel->updatedAt;
         $data->deletedAt = $albumViewModel->deletedAt;

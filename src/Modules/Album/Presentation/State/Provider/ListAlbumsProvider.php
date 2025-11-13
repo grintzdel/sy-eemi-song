@@ -43,6 +43,7 @@ final class ListAlbumsProvider implements ProviderInterface
         $resource->artistId = $viewModel->artistId;
         $resource->name = $viewModel->name;
         $resource->categoryId = $viewModel->categoryId;
+        $resource->coverImage = $viewModel->coverImage;
         $resource->createdAt = $viewModel->createdAt;
         $resource->updatedAt = $viewModel->updatedAt;
         $resource->deletedAt = $viewModel->deletedAt;

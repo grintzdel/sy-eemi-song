@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\Song\Application\Commands\UpdateSong;
 
 use App\Modules\Shared\Domain\ValueObjects\CategoryId;
+use App\Modules\Shared\Domain\ValueObjects\CoverImage;
 use App\Modules\Shared\Domain\ValueObjects\SongId;
 use App\Modules\Shared\Domain\ValueObjects\UserId;
 use App\Modules\Song\Application\ViewModels\SongViewModel;
@@ -54,7 +55,10 @@ final readonly class UpdateSongCommandHandler
             name: new SongName($command->getName()),
             categoryId: new CategoryId($command->getCategoryId()),
             tag: new SongTag($command->getTag()),
-            duration: new SongDuration($command->getDuration())
+            duration: new SongDuration($command->getDuration()),
+            coverImage: $command->getCoverImage() !== null
+                ? new CoverImage($command->getCoverImage())
+                : null
         );
 
         $this->songRepository->save($song);

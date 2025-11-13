@@ -32,13 +32,20 @@ final readonly class UpdateSongCommand
     #[Assert\LessThan(value: 86400, message: 'Duration cannot exceed 24 hours')]
     private int $duration;
 
+    #[Assert\Length(
+        max: 500,
+        maxMessage: 'Cover image URL cannot exceed {{ limit }} characters'
+    )]
+    private ?string $coverImage;
+
     public function __construct(
         string $id,
         string $artistId,
         string $name,
         string $categoryId,
         ?string $tag,
-        int $duration
+        int $duration,
+        ?string $coverImage = null
     )
     {
         $this->id = $id;
@@ -47,6 +54,7 @@ final readonly class UpdateSongCommand
         $this->categoryId = $categoryId;
         $this->tag = $tag;
         $this->duration = $duration;
+        $this->coverImage = $coverImage;
     }
 
     public function getId(): string
@@ -77,5 +85,10 @@ final readonly class UpdateSongCommand
     public function getDuration(): int
     {
         return $this->duration;
+    }
+
+    public function getCoverImage(): ?string
+    {
+        return $this->coverImage;
     }
 }

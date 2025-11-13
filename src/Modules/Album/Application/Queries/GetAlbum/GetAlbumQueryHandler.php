@@ -33,6 +33,8 @@ final readonly class GetAlbumQueryHandler
             id: $album->getId()->getValue(),
             artistId: $album->getArtistId()->getValue(),
             name: $album->getName()->getValue(),
+            categoryId: $album->getCategoryId()?->getValue(),
+            coverImage: $album->getCoverImage()?->getValue(),
             createdAt: $album->getCreatedAt(),
             updatedAt: $album->getUpdatedAt(),
             deletedAt: $album->getDeletedAt()

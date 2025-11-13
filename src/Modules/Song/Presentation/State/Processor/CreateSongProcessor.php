@@ -30,7 +30,8 @@ final class CreateSongProcessor implements ProcessorInterface
             name: $data->name,
             categoryId: $data->categoryId,
             tag: $data->tag,
-            duration: $data->duration
+            duration: $data->duration,
+            coverImage: $data->coverImage
         );
 
         $idViewModel = $this->handle($command);

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\Song\Infrastructure\Doctrine\Repositories;
 
 use App\Modules\Shared\Domain\ValueObjects\CategoryId;
+use App\Modules\Shared\Domain\ValueObjects\CoverImage;
 use App\Modules\Shared\Domain\ValueObjects\SongId;
 use App\Modules\Shared\Domain\ValueObjects\UserId;
 use App\Modules\Song\Domain\Entities\Song;
@@ -107,6 +108,9 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
             categoryId: new CategoryId($entity->getCategoryId()),
             tag: new SongTag($entity->getTag()),
             duration: new SongDuration($entity->getDuration()),
+            coverImage: $entity->getCoverImage() !== null
+                ? new CoverImage($entity->getCoverImage())
+                : null,
             createdAt: $entity->getCreatedAt(),
             updatedAt: $entity->getUpdatedAt(),
             deletedAt: $entity->getDeletedAt()
@@ -122,6 +126,7 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
             categoryId: $song->getCategoryId()->getValue(),
             tag: $song->getTag()->getValue(),
             duration: $song->getDuration()->getSeconds(),
+            coverImage: $song->getCoverImage()?->getValue(),
             createdAt: $song->getCreatedAt(),
             updatedAt: $song->getUpdatedAt(),
             deletedAt: $song->getDeletedAt()
@@ -134,6 +139,7 @@ class SqlSongRepository extends ServiceEntityRepository implements ISongReposito
         $entity->setCategoryId($song->getCategoryId()->getValue());
         $entity->setTag($song->getTag()->getValue());
         $entity->setDuration($song->getDuration()->getSeconds());
+        $entity->setCoverImage($song->getCoverImage()?->getValue());
         $entity->setUpdatedAt($song->getUpdatedAt());
         $entity->setDeletedAt($song->getDeletedAt());
     }

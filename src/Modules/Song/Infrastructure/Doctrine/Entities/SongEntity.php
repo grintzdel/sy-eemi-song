@@ -37,6 +37,9 @@ class SongEntity
     #[ORM\Column(type: 'integer')]
     private int $duration;
 
+    #[ORM\Column(name: 'cover_image', type: 'string', length: 500, nullable: true)]
+    private ?string $coverImage;
+
     #[ORM\Column(name: 'created_at', type: 'datetime_immutable')]
     private \DateTimeImmutable $createdAt;
 
@@ -53,6 +56,7 @@ class SongEntity
         string $categoryId,
         ?string $tag,
         int $duration,
+        ?string $coverImage,
         \DateTimeImmutable $createdAt,
         \DateTimeImmutable $updatedAt,
         ?\DateTimeImmutable $deletedAt = null
@@ -64,6 +68,7 @@ class SongEntity
         $this->categoryId = $categoryId;
         $this->tag = $tag;
         $this->duration = $duration;
+        $this->coverImage = $coverImage;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
         $this->deletedAt = $deletedAt;
@@ -135,6 +140,16 @@ class SongEntity
     public function setDuration(int $duration): void
     {
         $this->duration = $duration;
+    }
+
+    public function getCoverImage(): ?string
+    {
+        return $this->coverImage;
+    }
+
+    public function setCoverImage(?string $coverImage): void
+    {
+        $this->coverImage = $coverImage;
     }
 
     public function getCreatedAt(): \DateTimeImmutable

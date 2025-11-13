@@ -12,6 +12,7 @@ use App\Modules\Album\Domain\ValueObjects\AlbumId;
 use App\Modules\Album\Domain\ValueObjects\AlbumName;
 use App\Modules\Shared\Application\Ports\Services\IIdProvider;
 use App\Modules\Shared\Domain\ValueObjects\CategoryId;
+use App\Modules\Shared\Domain\ValueObjects\CoverImage;
 use App\Modules\Shared\Domain\ValueObjects\UserId;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -36,7 +37,10 @@ final readonly class CreateAlbumCommandHandler
             id: new AlbumId($this->idProvider->generateId()),
             artistId: new UserId($command->getArtistId()),
             name: new AlbumName($command->getName()),
-            categoryId: $categoryId
+            categoryId: $categoryId,
+            coverImage: $command->getCoverImage() !== null
+                ? new CoverImage($command->getCoverImage())
+                : null
         );
 
         $this->albumRepository->save($album);
@@ -46,6 +50,7 @@ final readonly class CreateAlbumCommandHandler
             artistId: $album->getArtistId()->getValue(),
             name: $album->getName()->getValue(),
             categoryId: $album->getCategoryId()?->getValue(),
+            coverImage: $album->getCoverImage()?->getValue(),
             createdAt: $album->getCreatedAt(),
             updatedAt: $album->getUpdatedAt(),
             deletedAt: $album->getDeletedAt()

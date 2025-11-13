@@ -33,7 +33,8 @@ final class UpdateSongProcessor implements ProcessorInterface
             name: $data->name,
             categoryId: $data->categoryId,
             tag: $data->tag,
-            duration: $data->duration
+            duration: $data->duration,
+            coverImage: $data->coverImage
         );
 
         $songViewModel = $this->handle($command);
@@ -44,6 +45,7 @@ final class UpdateSongProcessor implements ProcessorInterface
         $data->categoryId = $songViewModel->categoryId;
         $data->tag = $songViewModel->tag;
         $data->duration = $songViewModel->duration;
+        $data->coverImage = $songViewModel->coverImage;
         $data->durationFormatted = $songViewModel->durationFormatted;
         $data->createdAt = $songViewModel->createdAt;
         $data->updatedAt = $songViewModel->updatedAt;

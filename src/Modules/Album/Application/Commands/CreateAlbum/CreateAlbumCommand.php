@@ -21,7 +21,13 @@ final readonly class CreateAlbumCommand
         private string $name,
 
         #[Assert\Uuid(message: 'Category ID must be a valid UUID')]
-        private ?string $categoryId = null
+        private ?string $categoryId = null,
+
+        #[Assert\Length(
+            max: 500,
+            maxMessage: 'Cover image URL cannot exceed {{ limit }} characters'
+        )]
+        private ?string $coverImage = null
     ) {}
 
     public function getArtistId(): string
@@ -37,5 +43,10 @@ final readonly class CreateAlbumCommand
     public function getCategoryId(): ?string
     {
         return $this->categoryId;
+    }
+
+    public function getCoverImage(): ?string
+    {
+        return $this->coverImage;
     }
 }

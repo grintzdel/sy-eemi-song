@@ -72,6 +72,12 @@ class SongResource
     #[Assert\LessThan(value: 86400, message: 'Duration cannot exceed 24 hours')]
     public int $duration;
 
+    #[Assert\Length(
+        max: 500,
+        maxMessage: 'Cover image URL cannot exceed {{ limit }} characters'
+    )]
+    public ?string $coverImage = null;
+
     public ?string $durationFormatted = null;
 
     public ?string $createdAt = null;

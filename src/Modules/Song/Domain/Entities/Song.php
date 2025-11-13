@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\Song\Domain\Entities;
 
 use App\Modules\Shared\Domain\ValueObjects\CategoryId;
+use App\Modules\Shared\Domain\ValueObjects\CoverImage;
 use App\Modules\Shared\Domain\ValueObjects\SongId;
 use App\Modules\Shared\Domain\ValueObjects\UserId;
 use App\Modules\Song\Domain\ValueObjects\SongDuration;
@@ -20,6 +21,7 @@ class Song
         private CategoryId                  $categoryId,
         private SongTag                     $tag,
         private SongDuration                $duration,
+        private ?CoverImage                 $coverImage,
         private readonly \DateTimeImmutable $createdAt,
         private \DateTimeImmutable          $updatedAt,
         private ?\DateTimeImmutable         $deletedAt = null
@@ -31,7 +33,8 @@ class Song
         SongName     $name,
         CategoryId   $categoryId,
         SongTag      $tag,
-        SongDuration $duration
+        SongDuration $duration,
+        ?CoverImage  $coverImage = null
     ): self
     {
         $now = new \DateTimeImmutable();
@@ -43,6 +46,7 @@ class Song
             $categoryId,
             $tag,
             $duration,
+            $coverImage,
             $now,
             $now
         );
@@ -52,13 +56,15 @@ class Song
         SongName     $name,
         CategoryId   $categoryId,
         SongTag      $tag,
-        SongDuration $duration
+        SongDuration $duration,
+        ?CoverImage  $coverImage = null
     ): void
     {
         $this->name = $name;
         $this->categoryId = $categoryId;
         $this->tag = $tag;
         $this->duration = $duration;
+        $this->coverImage = $coverImage;
         $this->updatedAt = new \DateTimeImmutable();
     }
 
@@ -113,6 +119,11 @@ class Song
     public function getDuration(): SongDuration
     {
         return $this->duration;
+    }
+
+    public function getCoverImage(): ?CoverImage
+    {
+        return $this->coverImage;
     }
 
     public function getCreatedAt(): \DateTimeImmutable
