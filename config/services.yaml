@@ -25,5 +25,8 @@ services:
     App\Modules\Album\Domain\Repositories\IAlbumRepository:
         class: App\Modules\Album\Infrastructure\Doctrine\Repositories\SqlAlbumRepository
 
+    App\Modules\Category\Domain\Repositories\ICategoryRepository:
+        class: App\Modules\Category\Infrastructure\Doctrine\Repositories\SqlCategoryRepository
+
     App\Modules\Shared\Application\Ports\Services\IIdProvider:
         class: App\Modules\Shared\Infrastructure\Services\UuidProvider

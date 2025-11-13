@@ -21,6 +21,11 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Modules/Album/Infrastructure/Doctrine/Entities'
                 prefix: 'App\Modules\Album\Infrastructure\Doctrine\Entities'
                 is_bundle: false
+            Category:
+                type: attribute
+                dir: '%kernel.project_dir%/src/Modules/Category/Infrastructure/Doctrine/Entities'
+                prefix: 'App\Modules\Category\Infrastructure\Doctrine\Entities'
+                is_bundle: false
             #User:
                 #type: attribute
                 #dir: '%kernel.project_dir%/src/Modules/User/Infrastructure/Doctrine/Entities'
