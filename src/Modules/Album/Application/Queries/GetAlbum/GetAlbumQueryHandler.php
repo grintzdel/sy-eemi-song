@@ -7,7 +7,7 @@ namespace App\Modules\Album\Application\Queries\GetAlbum;
 use App\Modules\Album\Application\ViewModels\AlbumViewModel;
 use App\Modules\Album\Domain\Exceptions\AlbumNotFoundException;
 use App\Modules\Album\Domain\Repositories\IAlbumRepository;
-use App\Modules\Album\Domain\ValueObjects\AlbumId;
+use App\Modules\Shared\Domain\ValueObjects\AlbumId;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]

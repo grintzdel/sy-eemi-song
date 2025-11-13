@@ -7,7 +7,7 @@ namespace App\Modules\Album\Application\Commands\AddSongToAlbum;
 use App\Modules\Album\Domain\Exceptions\AlbumNotFoundException;
 use App\Modules\Album\Domain\Exceptions\UnauthorizedAlbumAccessException;
 use App\Modules\Album\Domain\Repositories\IAlbumRepository;
-use App\Modules\Album\Domain\ValueObjects\AlbumId;
+use App\Modules\Shared\Domain\ValueObjects\AlbumId;
 use App\Modules\Shared\Domain\ValueObjects\SongId;
 use App\Modules\Shared\Domain\ValueObjects\UserId;
 use App\Modules\Song\Domain\Exceptions\SongNotFoundException;

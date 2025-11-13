@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Modules\Album\Domain\Entities;
 
-use App\Modules\Album\Domain\ValueObjects\AlbumId;
 use App\Modules\Album\Domain\ValueObjects\AlbumName;
+use App\Modules\Shared\Domain\ValueObjects\AlbumId;
 use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 use App\Modules\Shared\Domain\ValueObjects\CoverImage;
 use App\Modules\Shared\Domain\ValueObjects\UserId;
