@@ -7,6 +7,7 @@ namespace App\Modules\Album\Application\Commands\RemoveSongFromAlbum;
 use App\Modules\Album\Domain\Exceptions\AlbumNotFoundException;
 use App\Modules\Album\Domain\Exceptions\UnauthorizedAlbumAccessException;
 use App\Modules\Album\Domain\Repositories\IAlbumRepository;
+use App\Modules\Shared\Application\Services\IUserProvider;
 use App\Modules\Shared\Domain\ValueObjects\AlbumId;
 use App\Modules\Shared\Domain\ValueObjects\SongId;
 use App\Modules\Shared\Domain\ValueObjects\UserId;
@@ -19,8 +20,10 @@ final readonly class RemoveSongFromAlbumCommandHandler
 {
     public function __construct(
         private IAlbumRepository $albumRepository,
-        private ISongRepository $songRepository
-    ) {}
+        private ISongRepository $songRepository,
+        private IUserProvider $userProvider,
+    ) {
+    }
 
     /**
      * @throws AlbumNotFoundException
@@ -32,22 +35,19 @@ final readonly class RemoveSongFromAlbumCommandHandler
         $albumId = new AlbumId($command->getAlbumId());
         $album = $this->albumRepository->findById($albumId);
 
-        if ($album === null) {
+        if (null === $album) {
             throw AlbumNotFoundException::withId($command->getAlbumId());
         }
 
-        $requestingUserId = new UserId($command->getArtistId());
-        if (!$album->isOwnedBy($requestingUserId)) {
-            throw UnauthorizedAlbumAccessException::forUser(
-                $command->getArtistId(),
-                $command->getAlbumId()
-            );
+        $currentUserId = new UserId($this->userProvider->getUserId());
+        if (!$album->isOwnedBy($currentUserId)) {
+            throw UnauthorizedAlbumAccessException::forUser($this->userProvider->getUserId(), $command->getAlbumId());
         }
 
         $songId = new SongId($command->getSongId());
         $song = $this->songRepository->findById($songId);
 
-        if ($song === null) {
+        if (null === $song) {
             throw SongNotFoundException::withId($command->getSongId());
         }
 

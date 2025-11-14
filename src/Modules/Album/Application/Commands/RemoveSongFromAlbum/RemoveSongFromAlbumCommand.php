@@ -16,11 +16,8 @@ final readonly class RemoveSongFromAlbumCommand
         #[Assert\NotBlank(message: 'Song ID is required')]
         #[Assert\Uuid(message: 'Song ID must be a valid UUID')]
         private string $songId,
-
-        #[Assert\NotBlank(message: 'Artist ID is required')]
-        #[Assert\Uuid(message: 'Artist ID must be a valid UUID')]
-        private string $artistId
-    ) {}
+    ) {
+    }
 
     public function getAlbumId(): string
     {
@@ -30,10 +27,5 @@ final readonly class RemoveSongFromAlbumCommand
     public function getSongId(): string
     {
         return $this->songId;
-    }
-
-    public function getArtistId(): string
-    {
-        return $this->artistId;
     }
 }

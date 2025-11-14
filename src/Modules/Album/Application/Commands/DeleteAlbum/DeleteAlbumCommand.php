@@ -12,19 +12,11 @@ final readonly class DeleteAlbumCommand
         #[Assert\NotBlank(message: 'Album ID is required')]
         #[Assert\Uuid(message: 'Album ID must be a valid UUID')]
         private string $id,
-
-        #[Assert\NotBlank(message: 'Artist ID is required')]
-        #[Assert\Uuid(message: 'Artist ID must be a valid UUID')]
-        private string $artistId
-    ) {}
+    ) {
+    }
 
     public function getId(): string
     {
         return $this->id;
-    }
-
-    public function getArtistId(): string
-    {
-        return $this->artistId;
     }
 }

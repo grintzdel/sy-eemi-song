@@ -7,6 +7,7 @@ namespace App\Modules\Album\Application\Commands\DeleteAlbum;
 use App\Modules\Album\Domain\Exceptions\AlbumNotFoundException;
 use App\Modules\Album\Domain\Exceptions\UnauthorizedAlbumAccessException;
 use App\Modules\Album\Domain\Repositories\IAlbumRepository;
+use App\Modules\Shared\Application\Services\IUserProvider;
 use App\Modules\Shared\Domain\ValueObjects\AlbumId;
 use App\Modules\Shared\Domain\ValueObjects\UserId;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
@@ -15,8 +16,10 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 final readonly class DeleteAlbumCommandHandler
 {
     public function __construct(
-        private IAlbumRepository $albumRepository
-    ) {}
+        private IAlbumRepository $albumRepository,
+        private IUserProvider $userProvider,
+    ) {
+    }
 
     /**
      * @throws AlbumNotFoundException
@@ -27,16 +30,13 @@ final readonly class DeleteAlbumCommandHandler
         $albumId = new AlbumId($command->getId());
         $album = $this->albumRepository->findById($albumId);
 
-        if ($album === null) {
+        if (null === $album) {
             throw AlbumNotFoundException::withId($command->getId());
         }
 
-        $requestingUserId = new UserId($command->getArtistId());
-        if (!$album->isOwnedBy($requestingUserId)) {
-            throw UnauthorizedAlbumAccessException::forUser(
-                $command->getArtistId(),
-                $command->getId()
-            );
+        $currentUserId = new UserId($this->userProvider->getUserId());
+        if (!$album->isOwnedBy($currentUserId)) {
+            throw UnauthorizedAlbumAccessException::forUser($this->userProvider->getUserId(), $command->getId());
         }
 
         $this->albumRepository->delete($albumId);

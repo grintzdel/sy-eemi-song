@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Song\Application\Commands\UpdateSong;
 
+use App\Modules\Shared\Application\Services\IUserProvider;
 use App\Modules\Shared\Domain\ValueObjects\CategoryId;
 use App\Modules\Shared\Domain\ValueObjects\CoverImage;
 use App\Modules\Shared\Domain\ValueObjects\SongId;
@@ -23,9 +24,9 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 final readonly class UpdateSongCommandHandler
 {
     public function __construct(
-        private ISongRepository $songRepository
-    )
-    {
+        private ISongRepository $songRepository,
+        private IUserProvider $userProvider,
+    ) {
     }
 
     /**
@@ -39,23 +40,20 @@ final readonly class UpdateSongCommandHandler
         $songId = new SongId($command->getId());
         $song = $this->songRepository->findById($songId);
 
-        if ($song === null) {
+        if (null === $song) {
             throw SongNotFoundException::withId($command->getId());
         }
 
-        $requestingUserId = new UserId($command->getArtistId());
-        if (!$song->isOwnedBy($requestingUserId)) {
-            throw UnauthorizedSongAccessException::forUser(
-                $command->getArtistId(),
-                $command->getId()
-            );
+        $currentUserId = new UserId($this->userProvider->getUserId());
+        if (!$song->isOwnedBy($currentUserId)) {
+            throw UnauthorizedSongAccessException::forUser($this->userProvider->getUserId(), $command->getId());
         }
 
-        $tagId = $command->getTagId() !== null
+        $tagId = null !== $command->getTagId()
             ? new TagId($command->getTagId())
             : null;
 
-        $coverImage = $command->getCoverImage() !== null
+        $coverImage = null !== $command->getCoverImage()
             ? new CoverImage($command->getCoverImage())
             : null;
 

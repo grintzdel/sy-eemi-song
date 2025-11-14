@@ -30,3 +30,9 @@ services:
 
     App\Modules\Shared\Application\Ports\Services\IIdProvider:
         class: App\Modules\Shared\Infrastructure\Services\UuidProvider
+
+    App\Modules\Shared\Application\Services\IUserProvider:
+        class: App\Modules\Shared\Infrastructure\Services\SymfonyUserProvider
+
+    App\Modules\User\Domain\Repositories\IUserRepository:
+        class: App\Modules\User\Infrastructure\Doctrine\Repositories\SqlUserRepository
