@@ -29,7 +29,6 @@ use App\Modules\User\Presentation\State\Provider\ListUsersProvider;
         ),
         new Get(
             uriTemplate: '/users/email/{email}',
-            security: 'is_granted("ROLE_ADMIN") or is_granted("ROLE_MODERATOR")',
             provider: GetUserByEmailProvider::class
         ),
         new Post(
