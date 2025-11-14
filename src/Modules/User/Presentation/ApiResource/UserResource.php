@@ -12,6 +12,7 @@ use ApiPlatform\Metadata\Put;
 use App\Modules\User\Application\ViewModels\UserViewModel;
 use App\Modules\User\Presentation\State\Processor\CreateUserProcessor;
 use App\Modules\User\Presentation\State\Processor\UpdateUserProcessor;
+use App\Modules\User\Presentation\State\Provider\GetUserByEmailProvider;
 use App\Modules\User\Presentation\State\Provider\GetUserProvider;
 use App\Modules\User\Presentation\State\Provider\ListUsersProvider;
 
@@ -25,6 +26,11 @@ use App\Modules\User\Presentation\State\Provider\ListUsersProvider;
         new Get(
             security: 'is_granted("ROLE_USER")',
             provider: GetUserProvider::class
+        ),
+        new Get(
+            uriTemplate: '/users/email/{email}',
+            security: 'is_granted("ROLE_ADMIN") or is_granted("ROLE_MODERATOR")',
+            provider: GetUserByEmailProvider::class
         ),
         new Post(
             security: 'is_granted("ROLE_ADMIN")',
