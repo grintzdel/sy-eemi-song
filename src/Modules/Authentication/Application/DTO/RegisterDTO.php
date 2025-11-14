@@ -17,6 +17,12 @@ final readonly class RegisterDTO
         public string $email,
 
         #[Assert\NotBlank]
-        public string $password
+        public string $password,
+
+        #[Assert\Choice(
+            choices: ['ROLE_USER', 'ROLE_ARTIST'],
+            message: 'Role must be either ROLE_USER or ROLE_ARTIST'
+        )]
+        public ?string $role = 'ROLE_USER'
     ) {}
 }

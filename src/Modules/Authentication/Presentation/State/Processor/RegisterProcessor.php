@@ -32,7 +32,7 @@ final class RegisterProcessor implements ProcessorInterface
             name: $data->name,
             email: $data->email,
             password: $data->password,
-            role: Roles::ROLE_USER->value
+            role: $data->role ?? Roles::ROLE_USER->value
         );
 
         return $this->handle($command);
