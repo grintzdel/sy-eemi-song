@@ -7,7 +7,6 @@ namespace App\DataFixtures;
 use App\Modules\Album\Infrastructure\Doctrine\Entities\AlbumEntity;
 use App\Modules\Category\Infrastructure\Doctrine\Entities\CategoryEntity;
 use App\Modules\User\Infrastructure\Doctrine\Entities\UserEntity;
-use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -25,17 +24,17 @@ final class AlbumFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        for ($i = 1; $i <= 50; $i++) {
+        for ($i = 1; $i <= 50; ++$i) {
             $artistIndex = $this->faker->numberBetween(1, 10);
             /** @var UserEntity $artist */
-            $artist = $this->getReference('user_artist_' . $artistIndex, UserEntity::class);
+            $artist = $this->getReference('user_artist_'.$artistIndex, UserEntity::class);
 
             $categoryId = null;
             if ($this->faker->boolean(70)) {
                 $categoryKeys = array_keys(CategoryFixtures::CATEGORIES);
                 $randomCategory = $this->faker->randomElement($categoryKeys);
                 /** @var CategoryEntity $category */
-                $category = $this->getReference('category_' . strtolower($randomCategory), CategoryEntity::class);
+                $category = $this->getReference('category_'.strtolower($randomCategory), CategoryEntity::class);
                 $categoryId = $category->getId();
             }
 
@@ -50,13 +49,13 @@ final class AlbumFixtures extends Fixture implements DependentFixtureInterface
                 name: $this->generateAlbumName(),
                 categoryId: $categoryId,
                 coverImage: $coverImage,
-                createdAt: new DateTimeImmutable(),
-                updatedAt: new DateTimeImmutable()
+                createdAt: new \DateTimeImmutable(),
+                updatedAt: new \DateTimeImmutable()
             );
 
             $manager->persist($album);
 
-            $this->addReference('album_' . $i, $album);
+            $this->addReference('album_'.$i, $album);
         }
 
         $manager->flush();
@@ -103,6 +102,6 @@ final class AlbumFixtures extends Fixture implements DependentFixtureInterface
             return $this->faker->randomElement($albumTypes);
         }
 
-        return $this->faker->randomElement($albumWords) . ' ' . $this->faker->randomElement(['and', 'of', 'in']) . ' ' . $this->faker->randomElement($albumWords);
+        return $this->faker->randomElement($albumWords).' '.$this->faker->randomElement(['and', 'of', 'in']).' '.$this->faker->randomElement($albumWords);
     }
 }

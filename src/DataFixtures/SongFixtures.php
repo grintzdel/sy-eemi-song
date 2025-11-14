@@ -9,7 +9,6 @@ use App\Modules\Category\Infrastructure\Doctrine\Entities\CategoryEntity;
 use App\Modules\Song\Infrastructure\Doctrine\Entities\SongEntity;
 use App\Modules\Tag\Infrastructure\Doctrine\Entities\TagEntity;
 use App\Modules\User\Infrastructure\Doctrine\Entities\UserEntity;
-use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -27,21 +26,21 @@ final class SongFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        for ($i = 1; $i <= 150; $i++) {
+        for ($i = 1; $i <= 150; ++$i) {
             $artistIndex = $this->faker->numberBetween(1, 10);
             /** @var UserEntity $artist */
-            $artist = $this->getReference('user_artist_' . $artistIndex, UserEntity::class);
+            $artist = $this->getReference('user_artist_'.$artistIndex, UserEntity::class);
 
             $categoryKeys = array_keys(CategoryFixtures::CATEGORIES);
             $randomCategory = $this->faker->randomElement($categoryKeys);
             /** @var CategoryEntity $category */
-            $category = $this->getReference('category_' . strtolower($randomCategory), CategoryEntity::class);
+            $category = $this->getReference('category_'.strtolower($randomCategory), CategoryEntity::class);
 
             $tagId = null;
             if ($this->faker->boolean(50)) {
                 $tagIndex = $this->faker->numberBetween(0, count(TagFixtures::TAGS) - 1);
                 /** @var TagEntity $tag */
-                $tag = $this->getReference('tag_' . $tagIndex, TagEntity::class);
+                $tag = $this->getReference('tag_'.$tagIndex, TagEntity::class);
                 $tagId = $tag->getId();
             }
 
@@ -58,8 +57,8 @@ final class SongFixtures extends Fixture implements DependentFixtureInterface
                 tagId: $tagId,
                 duration: $this->faker->numberBetween(120, 300),
                 coverImage: $coverImage,
-                createdAt: new DateTimeImmutable(),
-                updatedAt: new DateTimeImmutable()
+                createdAt: new \DateTimeImmutable(),
+                updatedAt: new \DateTimeImmutable()
             );
 
             $manager->persist($song);
@@ -70,7 +69,7 @@ final class SongFixtures extends Fixture implements DependentFixtureInterface
 
                 foreach ($albumIndexes as $albumIndex) {
                     /** @var AlbumEntity $album */
-                    $album = $this->getReference('album_' . $albumIndex, AlbumEntity::class);
+                    $album = $this->getReference('album_'.$albumIndex, AlbumEntity::class);
                     $song->addAlbum($album);
                 }
             }
@@ -125,6 +124,6 @@ final class SongFixtures extends Fixture implements DependentFixtureInterface
             return $this->faker->randomElement($songWords);
         }
 
-        return $this->faker->randomElement($songWords) . ' ' . $this->faker->randomElement($connectors) . ' ' . $this->faker->randomElement($songWords);
+        return $this->faker->randomElement($songWords).' '.$this->faker->randomElement($connectors).' '.$this->faker->randomElement($songWords);
     }
 }

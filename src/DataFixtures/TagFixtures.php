@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\DataFixtures;
 
 use App\Modules\Tag\Infrastructure\Doctrine\Entities\TagEntity;
-use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -49,13 +48,13 @@ final class TagFixtures extends Fixture
             $tag = new TagEntity(
                 id: $this->faker->uuid(),
                 name: $name,
-                createdAt: new DateTimeImmutable(),
-                updatedAt: new DateTimeImmutable()
+                createdAt: new \DateTimeImmutable(),
+                updatedAt: new \DateTimeImmutable()
             );
 
             $manager->persist($tag);
 
-            $this->addReference('tag_' . $index, $tag);
+            $this->addReference('tag_'.$index, $tag);
         }
 
         $manager->flush();

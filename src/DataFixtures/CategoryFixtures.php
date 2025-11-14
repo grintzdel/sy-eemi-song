@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\DataFixtures;
 
 use App\Modules\Category\Infrastructure\Doctrine\Entities\CategoryEntity;
-use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -40,13 +39,13 @@ final class CategoryFixtures extends Fixture
                 id: $this->faker->uuid(),
                 name: $name,
                 description: $description,
-                createdAt: new DateTimeImmutable(),
-                updatedAt: new DateTimeImmutable()
+                createdAt: new \DateTimeImmutable(),
+                updatedAt: new \DateTimeImmutable()
             );
 
             $manager->persist($category);
 
-            $this->addReference('category_' . strtolower($name), $category);
+            $this->addReference('category_'.strtolower($name), $category);
         }
 
         $manager->flush();
