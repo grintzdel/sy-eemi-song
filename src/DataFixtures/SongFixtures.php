@@ -47,7 +47,7 @@ final class SongFixtures extends Fixture implements DependentFixtureInterface
 
             $coverImage = null;
             if ($this->faker->boolean(50)) {
-                $coverImage = $this->faker->imageUrl(640, 480, 'music', true);
+                $coverImage = 'https://picsum.photos/640/480';
             }
 
             $song = new SongEntity(

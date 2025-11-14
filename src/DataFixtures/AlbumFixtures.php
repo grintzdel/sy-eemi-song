@@ -41,7 +41,7 @@ final class AlbumFixtures extends Fixture implements DependentFixtureInterface
 
             $coverImage = null;
             if ($this->faker->boolean(60)) {
-                $coverImage = $this->faker->imageUrl(640, 480, 'music');
+                $coverImage = 'https://picsum.photos/640/480';
             }
 
             $album = new AlbumEntity(
